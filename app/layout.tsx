@@ -6,7 +6,7 @@ import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Machine à remonter le temps",
+  title: "Capsulo",
   description: "Explorez musiques, films, mode et prix d'une année donnée.",
 };
 

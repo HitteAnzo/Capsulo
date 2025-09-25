@@ -87,7 +87,7 @@ export default function YearPage() {
             </ul>
           </Card>
 
-          {/* Music */}
+          {/* Music ————> MODIFIÉ : on utilise le proxy previewId */}
           <Card title={t(lang, "music")}>
             <ul className="grid gap-3">
               {data.music?.map((m, i) => (
@@ -96,17 +96,28 @@ export default function YearPage() {
                     <div className="font-semibold">{m.title}</div>
                     <div className="text-sm text-[#cfcfcf]">{m.artist}</div>
                   </div>
-                  {m.previewUrl && (
-                    <audio controls src={m.previewUrl} className="max-w-[120px]" />
+
+                  {/* Player via proxy API pour éviter CSP/CORS */}
+                  {m.deezerId && (
+                    <audio
+                      controls
+                      preload="none"
+                      src={`/api/timecapsule?previewId=${m.deezerId}`}
+                      className="max-w-[120px]"
+                    />
                   )}
-                  <a
-                    className="underline text-emerald-200"
-                    href={m.deezerUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Deezer
-                  </a>
+
+                  {/* Lien Deezer en complément */}
+                  {m.deezerUrl && (
+                    <a
+                      className="underline text-emerald-200"
+                      href={m.deezerUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Deezer
+                    </a>
+                  )}
                 </li>
               ))}
             </ul>
