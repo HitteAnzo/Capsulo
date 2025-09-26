@@ -68,73 +68,8 @@ export default function YearPage() {
 
       {data && (
         <div className="space-y-6">
-          {/* Grille principale pour les 4 premières cartes */}
-          <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <Card title={`${t(lang, "events")} (${data.year})`}>
-              <ul className="space-y-3">
-                {data.events?.map((e, i) => (
-                  <li key={i}>
-                    <a className="font-semibold underline" href={e.url} target="_blank" rel="noreferrer">{e.title}</a>
-                    <p className="text-sm text-[#cfcfcf] mt-1">{e.summary}</p>
-                  </li>
-                ))}
-              </ul>
-            </Card>
-
-            <Card title={t(lang, "music")}>
-              <ul className="space-y-3">
-                {data.music?.map((m, i) => (
-                  <li key={i} className="flex items-center gap-3">
-                    <div className="flex-1">
-                      <div className="font-semibold">{m.title}</div>
-                      <div className="text-sm text-[#cfcfcf]">{m.artist}</div>
-                    </div>
-                    {m.deezerId && <audio controls preload="none" src={`/api/timecapsule?previewId=${m.deezerId}`} className="max-w-[120px]" />}
-                  </li>
-                ))}
-              </ul>
-            </Card>
-
-            <Card title={t(lang, "lifePrices")}>
-              <div className="space-y-3">
-                {hasFRF && <button className="px-3 py-1 rounded-xl border border-border" onClick={() => setShowEUR(!showEUR)}>{showEUR ? "Afficher en FRF" : "Convertir en €"}</button>}
-                {hasFRF && !showEUR && <div>Prix de la baguette (250g) : <b>{data.breadPrice.frf_250g!.toFixed(2)} FRF</b></div>}
-                {hasFRF && showEUR && <div>Prix de la baguette (250g) converti : <b>{eurFromFRF!.toFixed(2)} €</b></div>}
-                {!hasFRF && data.breadPrice?.eur_250g !== undefined && <div>Prix de la baguette (250g) : <b>{data.breadPrice.eur_250g!.toFixed(2)} €</b></div>}
-                {data.breadPrice?.real2025 !== undefined && <div>{t(lang, "eqCurrent")} 2025 : <b>{data.breadPrice.real2025.toFixed(2)} €</b></div>}
-              </div>
-            </Card>
-
-            <Card title={t(lang, "fashion")}>
-              <ul className="space-y-3">
-                {data.fashion?.map((f, i) => (
-                  <li key={i} className="flex items-center gap-3">
-                    {f.image && <img src={f.image} alt={f.headline} className="w-16 h-16 object-cover rounded-lg" />}
-                    <a href={f.sourceUrl} target="_blank" rel="noreferrer" className="font-semibold underline">{f.headline}</a>
-                  </li>
-                ))}
-              </ul>
-            </Card>
-          </section>
-
-          {/* Sections séparées — une section par Card */}
-          <section className="mb-6">
-            <h2 className="text-xl font-semibold mb-3">{t(lang, "events")} — {data.year}</h2>
-            <Card title={`${t(lang, "events")} (${data.year})`}>
-              <ul className="space-y-3">
-                {data.events?.map((e, i) => (
-                  <li key={i}>
-                    <a className="font-semibold underline" href={e.url} target="_blank" rel="noreferrer">{e.title}</a>
-                    <p className="text-sm text-[#cfcfcf] mt-1">{e.summary}</p>
-                  </li>
-                ))}
-              </ul>
-            </Card>
-          </section>
-
           <section className="mb-6">
             <h2 className="text-xl font-semibold mb-3">{t(lang, "music")}</h2>
-            <Card title={t(lang, "music")}>
               <ul className="space-y-3">
                 {data.music?.map((m, i) => (
                   <li key={i} className="flex items-center gap-3">
@@ -146,25 +81,21 @@ export default function YearPage() {
                   </li>
                 ))}
               </ul>
-            </Card>
           </section>
 
           <section className="mb-6">
             <h2 className="text-xl font-semibold mb-3">{t(lang, "lifePrices")}</h2>
-            <Card title={t(lang, "lifePrices")}>
               <div className="space-y-3">
-                {hasFRF && <button className="px-3 py-1 rounded-xl border border-border" onClick={() => setShowEUR(!showEUR)}>{showEUR ? "Afficher en FRF" : "Convertir en €"}</button>}
+                {hasFRF && <button className="px-3 py-1 rounded-xl border border-border" onClick={() => setShowEUR(!showEUR)}>{showEUR ? "Convertir en Franc" : "Convertir en Euro"}</button>}
                 {hasFRF && !showEUR && <div>Prix de la baguette (250g) : <b>{data.breadPrice.frf_250g!.toFixed(2)} FRF</b></div>}
                 {hasFRF && showEUR && <div>Prix de la baguette (250g) converti : <b>{eurFromFRF!.toFixed(2)} €</b></div>}
                 {!hasFRF && data.breadPrice?.eur_250g !== undefined && <div>Prix de la baguette (250g) : <b>{data.breadPrice.eur_250g!.toFixed(2)} €</b></div>}
                 {data.breadPrice?.real2025 !== undefined && <div>{t(lang, "eqCurrent")} 2025 : <b>{data.breadPrice.real2025.toFixed(2)} €</b></div>}
               </div>
-            </Card>
           </section>
 
           <section className="mb-6">
             <h2 className="text-xl font-semibold mb-3">{t(lang, "fashion")}</h2>
-            <Card title={t(lang, "fashion")}>
               <ul className="space-y-3">
                 {data.fashion?.map((f, i) => (
                   <li key={i} className="flex items-center gap-3">
@@ -173,7 +104,6 @@ export default function YearPage() {
                   </li>
                 ))}
               </ul>
-            </Card>
           </section>
 
           {/* Movies: posters only, 3 côte à côte */}
