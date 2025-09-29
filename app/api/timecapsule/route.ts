@@ -3,6 +3,7 @@ import type { TimeCapsule } from "../../../lib/types";
 import { inflationFactor } from "../../../lib/cpi";
 import { baguetteForYear } from "../../../lib/baguette";
 import { cigaretteForYear } from "../../../lib/cigarette";
+import { gazoleForYear } from "../../../lib/gazole";
 import fs from "fs";
 import path from "path";
 import csvParser from "csv-parser";
@@ -206,6 +207,28 @@ async function fetchCigarette(year: number) {
   };
 }
 
+async function fetchGazole(year: number) {
+  const g = gazoleForYear(year);
+  if (!g) return undefined;
+
+  const factor = inflationFactor(year, CURRENT_YEAR);
+  let real: number | undefined;
+  if (factor && (g.price_eur_litre || g.price_frf_litre)) {
+    const nominalEUR = g.price_eur_litre ?? g.price_frf_litre! / 6.55957;
+    real = nominalEUR * factor;
+  }
+  return {
+    nominal: g.price_eur_litre,
+    currency: g.price_eur_litre ? "EUR" : undefined,
+    frf_litre: g.price_frf_litre,
+    eur_litre:
+      g.price_eur_litre ??
+      (g.price_frf_litre ? g.price_frf_litre / 6.55957 : undefined),
+    method: factor ? ("cpi" as const) : ("dataset" as const),
+    real2025: real,
+  };
+}
+
 // ----------------------
 // Mode
 // ----------------------
@@ -296,7 +319,7 @@ export async function GET(req: NextRequest) {
     );
   }
 
-  const [events, music, movies, bread, fashion, cigarette] =
+  const [events, music, movies, bread, fashion, cigarette, gazole] =
     await Promise.all([
       fetchEvents(year, lang),
       fetchMusic(year),
@@ -304,6 +327,7 @@ export async function GET(req: NextRequest) {
       fetchBread(year),
       fetchFashion(year, lang),
       fetchCigarette(year),
+      fetchGazole(year),
     ]);
 
   const payload: TimeCapsule = {
@@ -313,6 +337,7 @@ export async function GET(req: NextRequest) {
     movies,
     breadPrice: bread,
     cigarettePrice: cigarette,
+    gazolePrice: gazole,
     fashion,
   };
 

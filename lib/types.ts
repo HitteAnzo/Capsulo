@@ -19,5 +19,13 @@ export type TimeCapsule = {
     frf_pack?: number;
     eur_pack?: number;
   };
+  gazolePrice?: {
+    nominal?: number;
+    currency?: string;
+    real2025?: number;
+    method: "dataset" | "cpi" | "fallback";
+    frf_litre?: number;
+    eur_litre?: number;
+  };
   fashion: { headline: string; image?: string; sourceUrl: string }[];
 };

@@ -5,7 +5,8 @@ import type { TimeCapsule } from "../../../lib/types";
 import { t } from "../../../lib/i18n";
 import type { Lang } from "../../../components/LanguageToggle";
 import SongCard from "../../../components/SongCard";
-import { Music, Clapperboard, Banknote, Film, X } from "lucide-react";
+// Ajout des nouvelles icônes
+import { Music, Clapperboard, Banknote, Film, X, Wheat, Cigarette, Fuel } from "lucide-react";
 
 // --- Le composant de carte ---
 const InfoCard = ({
@@ -34,6 +35,43 @@ const InfoCard = ({
     <div className="text-muted-foreground">{children}</div>
   </div>
 );
+
+// --- NOUVEAU : Composant pour un élément de prix ---
+const PriceItem = ({
+  icon,
+  label,
+  price,
+  currency,
+  realPrice2025,
+}: {
+  icon: React.ReactNode;
+  label: string;
+  price?: number;
+  currency: string;
+  realPrice2025?: number;
+}) => {
+  if (price === undefined) return null;
+
+  return (
+    <div className="flex items-start gap-4">
+      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-secondary mt-1">
+        {icon}
+      </div>
+      <div className="flex-grow">
+        <p className="text-sm text-muted-foreground">{label}</p>
+        <p className="text-lg font-bold text-foreground">
+          {price.toFixed(2)} {currency}
+        </p>
+        {realPrice2025 !== undefined && (
+          <p className="text-xs text-muted-foreground/80">
+            ~ {realPrice2025.toFixed(2)} € en 2025
+          </p>
+        )}
+      </div>
+    </div>
+  );
+};
+
 
 // --- Le composant pour l'aperçu du film ---
 const MovieModal = ({
@@ -116,6 +154,11 @@ export default function YearPage() {
     ? data!.cigarettePrice!.frf_pack! / 6.55957
     : undefined;
 
+  const hasGazoleFRF = !!data?.gazolePrice?.frf_litre && y <= 2001;
+  const gazoleEurFromFRF = hasGazoleFRF
+    ? data!.gazolePrice!.frf_litre! / 6.55957
+    : undefined;
+
   return (
     <>
       <main className="container mx-auto max-w-5xl py-8 sm:py-16">
@@ -167,24 +210,36 @@ export default function YearPage() {
               title={t(lang, "lifePrices")}
               delay="400ms"
             >
-              <div className="space-y-3 text-sm">
-                {hasFRF && <button className="px-3 py-1 rounded-xl border border-border" onClick={() => setShowEUR(!showEUR)}>{showEUR ? "Convertir en Franc" : "Convertir en Euro"}</button>}
-                
-                {/* Prix du pain */}
-                {hasFRF && !showEUR && <div>Prix de la baguette (250g) : <b>{data.breadPrice.frf_250g!.toFixed(2)} FRF</b></div>}
-                {hasFRF && showEUR && <div>Prix de la baguette (250g) converti : <b>{eurFromFRF!.toFixed(2)} €</b></div>}
-                {!hasFRF && data.breadPrice?.eur_250g !== undefined && <div>Prix de la baguette (250g) : <b>{data.breadPrice.eur_250g!.toFixed(2)} €</b></div>}
-                {data.breadPrice?.real2025 !== undefined && <div className="pt-2 border-t border-border/40 mt-3">{t(lang, "eqCurrent")} 2025 : <b>{data.breadPrice.real2025.toFixed(2)} €</b></div>}
-
-                {/* Prix des cigarettes (uniquement si les données existent) */}
-                {data.cigarettePrice && (
-                  <div className="pt-3 mt-3 border-t border-border/40">
-                    {hasCigaretteFRF && !showEUR && <div>Prix du paquet de cigarettes : <b>{data.cigarettePrice!.frf_pack!.toFixed(2)} FRF</b></div>}
-                    {hasCigaretteFRF && showEUR && <div>Prix du paquet de cigarettes converti : <b>{cigaretteEurFromFRF!.toFixed(2)} €</b></div>}
-                    {!hasCigaretteFRF && data.cigarettePrice?.eur_pack !== undefined && <div>Prix du paquet de cigarettes : <b>{data.cigarettePrice.eur_pack!.toFixed(2)} €</b></div>}
-                    {data.cigarettePrice?.real2025 !== undefined && <div className="pt-2 border-t border-border/40 mt-3">{t(lang, "eqCurrent")} 2025 : <b>{data.cigarettePrice.real2025.toFixed(2)} €</b></div>}
+              <div className="flex flex-col gap-6">
+                {/* Bouton de conversion */}
+                {(hasFRF || hasCigaretteFRF || hasGazoleFRF) && (
+                  <div className="text-center">
+                    <button className="px-3 py-1 text-xs rounded-full border border-border" onClick={() => setShowEUR(!showEUR)}>{showEUR ? "Afficher en Francs" : "Afficher en Euros"}</button>
                   </div>
                 )}
+                
+                {/* Liste des prix */}
+                <PriceItem
+                  icon={<Wheat size={16} />}
+                  label="Prix de la baguette (250g)"
+                  price={showEUR ? eurFromFRF ?? data.breadPrice?.eur_250g : data.breadPrice?.frf_250g}
+                  currency={showEUR ? "€" : "FRF"}
+                  realPrice2025={data.breadPrice?.real2025}
+                />
+                <PriceItem
+                  icon={<Cigarette size={16} />}
+                  label="Prix du paquet de cigarettes"
+                  price={showEUR ? cigaretteEurFromFRF ?? data.cigarettePrice?.eur_pack : data.cigarettePrice?.frf_pack}
+                  currency={showEUR ? "€" : "FRF"}
+                  realPrice2025={data.cigarettePrice?.real2025}
+                />
+                <PriceItem
+                  icon={<Fuel size={16} />}
+                  label="Prix du litre de gazole"
+                  price={showEUR ? gazoleEurFromFRF ?? data.gazolePrice?.eur_litre : data.gazolePrice?.frf_litre}
+                  currency={showEUR ? "€" : "FRF"}
+                  realPrice2025={data.gazolePrice?.real2025}
+                />
               </div>
             </InfoCard>
 
