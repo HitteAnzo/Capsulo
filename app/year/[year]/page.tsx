@@ -111,6 +111,11 @@ export default function YearPage() {
     ? data!.breadPrice!.frf_250g! / 6.55957
     : undefined;
 
+  const hasCigaretteFRF = !!data?.cigarettePrice?.frf_pack && y <= 2001;
+  const cigaretteEurFromFRF = hasCigaretteFRF
+    ? data!.cigarettePrice!.frf_pack! / 6.55957
+    : undefined;
+
   return (
     <>
       <main className="container mx-auto max-w-5xl py-8 sm:py-16">
@@ -164,10 +169,22 @@ export default function YearPage() {
             >
               <div className="space-y-3 text-sm">
                 {hasFRF && <button className="px-3 py-1 rounded-xl border border-border" onClick={() => setShowEUR(!showEUR)}>{showEUR ? "Convertir en Franc" : "Convertir en Euro"}</button>}
+                
+                {/* Prix du pain */}
                 {hasFRF && !showEUR && <div>Prix de la baguette (250g) : <b>{data.breadPrice.frf_250g!.toFixed(2)} FRF</b></div>}
                 {hasFRF && showEUR && <div>Prix de la baguette (250g) converti : <b>{eurFromFRF!.toFixed(2)} €</b></div>}
                 {!hasFRF && data.breadPrice?.eur_250g !== undefined && <div>Prix de la baguette (250g) : <b>{data.breadPrice.eur_250g!.toFixed(2)} €</b></div>}
                 {data.breadPrice?.real2025 !== undefined && <div className="pt-2 border-t border-border/40 mt-3">{t(lang, "eqCurrent")} 2025 : <b>{data.breadPrice.real2025.toFixed(2)} €</b></div>}
+
+                {/* Prix des cigarettes (uniquement si les données existent) */}
+                {data.cigarettePrice && (
+                  <div className="pt-3 mt-3 border-t border-border/40">
+                    {hasCigaretteFRF && !showEUR && <div>Prix du paquet de cigarettes : <b>{data.cigarettePrice!.frf_pack!.toFixed(2)} FRF</b></div>}
+                    {hasCigaretteFRF && showEUR && <div>Prix du paquet de cigarettes converti : <b>{cigaretteEurFromFRF!.toFixed(2)} €</b></div>}
+                    {!hasCigaretteFRF && data.cigarettePrice?.eur_pack !== undefined && <div>Prix du paquet de cigarettes : <b>{data.cigarettePrice.eur_pack!.toFixed(2)} €</b></div>}
+                    {data.cigarettePrice?.real2025 !== undefined && <div className="pt-2 border-t border-border/40 mt-3">{t(lang, "eqCurrent")} 2025 : <b>{data.cigarettePrice.real2025.toFixed(2)} €</b></div>}
+                  </div>
+                )}
               </div>
             </InfoCard>
 

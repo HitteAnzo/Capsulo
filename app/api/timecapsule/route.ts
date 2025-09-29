@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import type { TimeCapsule } from "../../../lib/types";
 import { inflationFactor } from "../../../lib/cpi";
 import { baguetteForYear } from "../../../lib/baguette";
+import { cigaretteForYear } from "../../../lib/cigarette";
 import fs from "fs";
 import path from "path";
 import csvParser from "csv-parser";
@@ -183,6 +184,28 @@ async function fetchBread(year: number) {
   };
 }
 
+async function fetchCigarette(year: number) {
+  const c = cigaretteForYear(year);
+  if (!c) return undefined;
+
+  const factor = inflationFactor(year, CURRENT_YEAR);
+  let real: number | undefined;
+  if (factor && (c.price_eur_pack || c.price_frf_pack)) {
+    const nominalEUR = c.price_eur_pack ?? c.price_frf_pack! / 6.55957;
+    real = nominalEUR * factor;
+  }
+  return {
+    nominal: c.price_eur_pack,
+    currency: c.price_eur_pack ? "EUR" : undefined,
+    frf_pack: c.price_frf_pack,
+    eur_pack:
+      c.price_eur_pack ??
+      (c.price_frf_pack ? c.price_frf_pack / 6.55957 : undefined),
+    method: factor ? ("cpi" as const) : ("dataset" as const),
+    real2025: real,
+  };
+}
+
 // ----------------------
 // Mode
 // ----------------------
@@ -273,13 +296,15 @@ export async function GET(req: NextRequest) {
     );
   }
 
-  const [events, music, movies, bread, fashion] = await Promise.all([
-    fetchEvents(year, lang),
-    fetchMusic(year),
-    fetchMovies(year, lang),
-    fetchBread(year),
-    fetchFashion(year, lang),
-  ]);
+  const [events, music, movies, bread, fashion, cigarette] =
+    await Promise.all([
+      fetchEvents(year, lang),
+      fetchMusic(year),
+      fetchMovies(year, lang),
+      fetchBread(year),
+      fetchFashion(year, lang),
+      fetchCigarette(year),
+    ]);
 
   const payload: TimeCapsule = {
     year,
@@ -287,6 +312,7 @@ export async function GET(req: NextRequest) {
     music, // contient toujours { title, artist, deezerId, preview?, deezerUrl? }
     movies,
     breadPrice: bread,
+    cigarettePrice: cigarette,
     fashion,
   };
 

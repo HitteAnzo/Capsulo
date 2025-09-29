@@ -11,5 +11,13 @@ export type TimeCapsule = {
     frf_250g?: number;
     eur_250g?: number;
   };
+  cigarettePrice?: {
+    nominal?: number;
+    currency?: string;
+    real2025?: number;
+    method: "dataset" | "cpi" | "fallback";
+    frf_pack?: number;
+    eur_pack?: number;
+  };
   fashion: { headline: string; image?: string; sourceUrl: string }[];
 };
