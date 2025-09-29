@@ -40,7 +40,10 @@ export default function Page() {
           subtitle={t(lang, "subtitle")}
         />
 
-        <div className="max-w-md mx-auto flex flex-col items-center gap-4 mt-12">
+        <div
+          className="max-w-md mx-auto flex flex-col items-center gap-4 mt-12 animate-fade-in-up"
+          style={{ animationDelay: "300ms" }}
+        >
           <YearInputForm
             year={year}
             onYearChange={(value) => setYear(value ? Number(value) : undefined)}
