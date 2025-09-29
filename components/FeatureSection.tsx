@@ -13,7 +13,7 @@ const FeatureCard = ({
   delay: string;
 }) => (
   <div
-    className="relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-white/5 to-transparent p-8 shadow-2xl animate-fade-in-up"
+    className="relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-white/5 to-transparent p-8 shadow-2xl animate-fade-in-up flex flex-col items-center text-center"
     style={{ animationDelay: delay }}
   >
     <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10 border border-primary/20 mb-6">

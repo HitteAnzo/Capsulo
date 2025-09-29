@@ -1,13 +1,7 @@
 import React from "react";
 
-type Props = {
-  year: number | undefined;
-  onYearChange: (value: string) => void;
-  onSubmit: () => void;
-  onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
-  buttonText: string;
-  placeholder: string;
-};
+const MIN_YEAR = 1960;
+const MAX_YEAR = 2025;
 
 export default function YearInputForm({
   year,
@@ -16,23 +10,38 @@ export default function YearInputForm({
   onKeyDown,
   buttonText,
   placeholder,
-}: Props) {
+}: {
+  year: number | undefined;
+  onYearChange: (value: string) => void;
+  onSubmit: () => void;
+  onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  buttonText: string;
+  placeholder: string;
+}) {
   return (
-    <div className="flex w-full items-center gap-1 rounded-full bg-secondary p-1.5 transition-all duration-300 focus-within:ring-2 focus-within:ring-primary/50">
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        onSubmit();
+      }}
+      className="flex w-full items-center rounded-full border border-white/10 bg-white/5 p-2 shadow-lg backdrop-blur-sm"
+    >
       <input
         type="number"
         value={year ?? ""}
         onChange={(e) => onYearChange(e.target.value)}
         onKeyDown={onKeyDown}
-        className="w-full bg-transparent px-4 py-1 text-base outline-none placeholder:text-muted-foreground/50"
         placeholder={placeholder}
+        className="flex-grow bg-transparent focus:outline-none placeholder:text-muted-foreground/50 px-4 text-lg [-moz-appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+        min={MIN_YEAR}
+        max={MAX_YEAR}
       />
       <button
-        onClick={onSubmit}
-        className="flex-shrink-0 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-transform hover:scale-105 active:scale-100"
+        type="submit"
+        className="rounded-full bg-primary px-8 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
       >
         {buttonText}
       </button>
-    </div>
+    </form>
   );
 }

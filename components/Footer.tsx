@@ -1,10 +1,15 @@
+import React from "react";
+
 export default function Footer() {
+  const currentYear = new Date().getFullYear();
+
   return (
-    <footer className="py-6 text-center text-sm text-muted-foreground">
-      <p>
-        &copy; {new Date().getFullYear()} Capsulo. Conçu avec passion par des
-        explorateurs du temps.
-      </p>
+    <footer className="w-full py-8">
+      <div className="container mx-auto text-center">
+        <p className="text-sm text-muted-foreground">
+          &copy; {currentYear} Capsulo. Chaque année a son histoire.
+        </p>
+      </div>
     </footer>
   );
 }
