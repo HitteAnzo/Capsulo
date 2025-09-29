@@ -5,6 +5,10 @@ import type { TimeCapsule } from "../../../lib/types";
 import Card from "../../../components/Card";
 import { t } from "../../../lib/i18n";
 import type { Lang } from "../../../components/LanguageToggle";
+import SongCard from "../../../components/SongCard";
+
+const MIN_YEAR = 1960;
+const MAX_YEAR = 2025;
 
 export default function YearPage() {
   const params = useParams<{ year: string }>();
@@ -17,6 +21,7 @@ export default function YearPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showEUR, setShowEUR] = useState(true);
+  const [year, setYear] = useState<number | undefined>();
 
   useEffect(() => {
     if (!y || Number.isNaN(y)) return;
@@ -44,91 +49,69 @@ export default function YearPage() {
 
   return (
     <main>
-      <header className="flex items-end gap-4 mb-6">
+      <header className="mb-8 flex items-end justify-between gap-4">
         <div className="flex-1">
-          <h1 className="text-3xl md:text-4xl font-bold">{y}</h1>
-          <p className="text-sub mt-1">{t(lang, "subtitle")}</p>
+          <h1 className="text-5xl font-bold tracking-tighter">{y}</h1>
+          <p className="mt-1 text-muted-foreground">{t(lang, "subtitle")}</p>
         </div>
-        <div className="flex gap-2">
-          <button
-            onClick={() => router.push(`/?lang=${lang}`)}
-            className="px-4 py-2 rounded-xl border border-border hover:bg-white/10 transition"
-          >
-            {t(lang, "changeYear")}
-          </button>
-        </div>
+        <button
+          onClick={() => router.push(`/?lang=${lang}`)}
+          className="rounded-full border bg-secondary px-4 py-2 text-sm font-semibold transition-colors hover:bg-primary/10"
+        >
+          {t(lang, "changeYear")}
+        </button>
       </header>
 
       {error && (
-        <div className="bg-red-900/30 border border-red-800 p-3 rounded-xl mb-4">
+        <div className="rounded-lg border border-red-500/30 bg-red-500/10 p-4 text-red-400">
           {error}
         </div>
       )}
-      {loading && <div className="text-sub">{t(lang, "loading")}</div>}
+      {loading && <div className="text-muted-foreground">{t(lang, "loading")}</div>}
 
       {data && (
-        <div className="space-y-6">
-          <section className="mb-6">
-            <h2 className="text-xl font-semibold mb-3">{t(lang, "music")}</h2>
-              <ul className="space-y-3">
-                {data.music?.map((m, i) => (
-                  <li key={i} className="flex items-center gap-3">
-                    <div className="flex-1">
-                      <div className="font-semibold">{m.title}</div>
-                      <div className="text-sm text-[#cfcfcf]">{m.artist}</div>
-                    </div>
-                    {m.deezerId && <audio controls preload="none" src={`/api/timecapsule?previewId=${m.deezerId}`} className="max-w-[120px]" />}
-                  </li>
-                ))}
-              </ul>
-          </section>
-
-          <section className="mb-6">
-            <h2 className="text-xl font-semibold mb-3">{t(lang, "lifePrices")}</h2>
-              <div className="space-y-3">
-                {hasFRF && <button className="px-3 py-1 rounded-xl border border-border" onClick={() => setShowEUR(!showEUR)}>{showEUR ? "Convertir en Franc" : "Convertir en Euro"}</button>}
-                {hasFRF && !showEUR && <div>Prix de la baguette (250g) : <b>{data.breadPrice.frf_250g!.toFixed(2)} FRF</b></div>}
-                {hasFRF && showEUR && <div>Prix de la baguette (250g) converti : <b>{eurFromFRF!.toFixed(2)} €</b></div>}
-                {!hasFRF && data.breadPrice?.eur_250g !== undefined && <div>Prix de la baguette (250g) : <b>{data.breadPrice.eur_250g!.toFixed(2)} €</b></div>}
-                {data.breadPrice?.real2025 !== undefined && <div>{t(lang, "eqCurrent")} 2025 : <b>{data.breadPrice.real2025.toFixed(2)} €</b></div>}
-              </div>
-          </section>
-
-          <section className="mb-6">
-            <h2 className="text-xl font-semibold mb-3">{t(lang, "fashion")}</h2>
-              <ul className="space-y-3">
-                {data.fashion?.map((f, i) => (
-                  <li key={i} className="flex items-center gap-3">
-                    {f.image && <img src={f.image} alt={f.headline} className="w-16 h-16 object-cover rounded-lg" />}
-                    <a href={f.sourceUrl} target="_blank" rel="noreferrer" className="font-semibold underline">{f.headline}</a>
-                  </li>
-                ))}
-              </ul>
-          </section>
-
-          {/* Movies: posters only, 3 côte à côte */}
-          <section>
-            <div className="max-w-full">
-              <div className="grid grid-cols-3 gap-4 items-start">
-                {data.movies?.slice(0, 3).map((mv, i) => (
-                  <a
-                    key={i}
-                    href={mv.omdbUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="block"
-                  >
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={mv.poster}
-                      alt={mv.title}
-                      className="w-full h-48 object-cover rounded-lg"
-                    />
-                  </a>
-                ))}
-              </div>
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+          <Card title={t(lang, "music")} className="md:col-span-2">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              {data.music?.map((m, i) => (
+                <SongCard
+                  key={i}
+                  title={m.title}
+                  artist={m.artist}
+                  deezerUrl={m.deezerUrl}
+                  previewUrl={`/api/timecapsule?previewId=${m.deezerId}`}
+                />
+              ))}
             </div>
-          </section>
+          </Card>
+
+          <Card title={t(lang, "lifePrices")}>
+            <div className="space-y-3 text-sm">
+              {hasFRF && <button className="px-3 py-1 rounded-xl border border-border" onClick={() => setShowEUR(!showEUR)}>{showEUR ? "Convertir en Franc" : "Convertir en Euro"}</button>}
+              {hasFRF && !showEUR && <div>Prix de la baguette (250g) : <b>{data.breadPrice.frf_250g!.toFixed(2)} FRF</b></div>}
+              {hasFRF && showEUR && <div>Prix de la baguette (250g) converti : <b>{eurFromFRF!.toFixed(2)} €</b></div>}
+              {!hasFRF && data.breadPrice?.eur_250g !== undefined && <div>Prix de la baguette (250g) : <b>{data.breadPrice.eur_250g!.toFixed(2)} €</b></div>}
+              {data.breadPrice?.real2025 !== undefined && <div>{t(lang, "eqCurrent")} 2025 : <b>{data.breadPrice.real2025.toFixed(2)} €</b></div>}
+            </div>
+          </Card>
+
+          <Card title={t(lang, "movies")} className="md:col-span-3">
+            <div className="grid grid-cols-3 gap-4 sm:grid-cols-4 md:grid-cols-6">
+              {data.movies?.map((mv, i) => (
+                <a key={i} href={mv.omdbUrl} target="_blank" rel="noreferrer">
+                  <div className="aspect-[2/3] overflow-hidden rounded-md bg-secondary transition-transform hover:scale-105">
+                    {mv.poster && (
+                      <img
+                        src={mv.poster}
+                        alt={mv.title}
+                        className="h-full w-full object-cover"
+                      />
+                    )}
+                  </div>
+                </a>
+              ))}
+            </div>
+          </Card>
         </div>
       )}
     </main>

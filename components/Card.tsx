@@ -8,9 +8,17 @@ type Props = {
 
 export default function Card({ title, children, className = "" }: Props) {
   return (
-    <div className={`bg-card text-card-foreground rounded-lg border border-border p-4 shadow-sm ${className}`}>
-      {title && <h3 className="text-lg font-semibold mb-2 text-primary">{title}</h3>}
-      <div>{children}</div>
+    <div
+      className={`rounded-lg border bg-card text-card-foreground shadow-sm ${className}`}
+    >
+      {title && (
+        <div className="border-b p-4">
+          <h3 className="font-semibold leading-none tracking-tight text-primary">
+            {title}
+          </h3>
+        </div>
+      )}
+      <div className="p-4">{children}</div>
     </div>
   );
 }
