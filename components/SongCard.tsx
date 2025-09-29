@@ -6,6 +6,7 @@ type Props = {
   previewUrl?: string;
   artwork?: string; // On le garde au cas où, mais on ne l'affiche plus
   deezerUrl?: string;
+  theme: any; // On reçoit l'objet de thème
 };
 
 export default function SongCard({
@@ -13,6 +14,7 @@ export default function SongCard({
   artist,
   previewUrl,
   deezerUrl,
+  theme, // On récupère le thème
 }: Props) {
   return (
     <div className="flex items-center justify-between gap-4 py-4">
@@ -22,11 +24,11 @@ export default function SongCard({
           href={deezerUrl ?? "#"}
           target="_blank"
           rel="noreferrer"
-          className="block truncate font-semibold text-white hover:underline"
+          className={`block truncate font-semibold hover:underline ${theme.primaryText}`}
         >
           {title}
         </a>
-        <p className="truncate text-sm text-muted-foreground">{artist}</p>
+        <p className={`truncate text-sm ${theme.secondaryText}`}>{artist}</p>
       </div>
 
       {/* Lecteur Audio */}

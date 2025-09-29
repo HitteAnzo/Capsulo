@@ -26,12 +26,10 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 w-full bg-background/80 backdrop-blur-lg">
       <div className="container flex h-16 max-w-screen-2xl items-center justify-between">
-        {/* Logo plus grand */}
         <Link href="/" className="flex items-center">
           <span className="font-bold text-2xl tracking-tight">Capsulo</span>
         </Link>
 
-        {/* Barre de recherche */}
         <div className="relative w-full max-w-[220px]">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <input
