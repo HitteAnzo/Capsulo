@@ -1,10 +1,8 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { GeistSans } from "geist/font/sans";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Capsulo",
@@ -19,8 +17,9 @@ export default function RootLayout({
   return (
     <html lang="fr" className="dark">
       <body
-        className={`${inter.className} bg-background text-foreground antialiased`}
+        className={`${GeistSans.className} bg-background text-foreground antialiased`}
       >
+        <div className="pointer-events-none fixed inset-0 -z-10 bg-[radial-gradient(600px_circle_at_top,rgba(120,113,198,0.15),transparent_80%)]" />
         <div className="container flex min-h-screen flex-col">
           <Header />
           <main className="flex-grow">{children}</main>
