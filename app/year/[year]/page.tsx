@@ -335,7 +335,7 @@ export default function YearPage() {
                     title={m.title}
                     artist={m.artist}
                     deezerUrl={m.deezerUrl}
-                    previewUrl={`/api/timecapsule?previewId=${m.deezerId}`}
+                    previewUrl={m.previewUrl}
                     theme={theme}
                   />
                 ))}

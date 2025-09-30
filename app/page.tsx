@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Lang } from "../components/LanguageToggle";
 import { t } from "../lib/i18n";
@@ -12,7 +12,7 @@ import ParticlesBackground from "../components/ParticlesBackground";
 const MIN_YEAR = 1960;
 const MAX_YEAR = 2025;
 
-export default function Page() {
+function HomePageContent() {
   const [year, setYear] = useState<number | undefined>();
   const params = useSearchParams();
   const lang = (params.get("lang") || "fr") as Lang;
@@ -44,7 +44,7 @@ export default function Page() {
 
       <main className="flex flex-col items-center justify-center text-center flex-grow">
         <HeroSection
-          title="Un voyage dans chaque détail"
+          title="C'était mieux avant ?"
           subtitle={t(lang, "subtitle")}
         />
 
@@ -69,5 +69,13 @@ export default function Page() {
       </main>
       <FeatureSection />
     </>
+  );
+}
+
+export default function Page() {
+  return (
+    <Suspense fallback={<div>Chargement...</div>}>
+      <HomePageContent />
+    </Suspense>
   );
 }

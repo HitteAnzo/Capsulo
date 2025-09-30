@@ -92,7 +92,7 @@ async function fetchMusic(year: number) {
             title: row.title,
             artist: row.artist,
             deezerId: row.deezerId!,
-            preview: undefined,
+            previewUrl: undefined, // Renommer 'preview' en 'previewUrl'
             deezerUrl: undefined,
           };
         }
@@ -100,7 +100,7 @@ async function fetchMusic(year: number) {
           title: j.title ?? row.title,
           artist: j.artist?.name ?? row.artist,
           deezerId: String(j.id),
-          preview: j.preview || undefined,
+          previewUrl: j.preview || undefined, // Renommer 'preview' en 'previewUrl'
           deezerUrl: j.link || undefined,
         };
       } catch {
@@ -108,7 +108,7 @@ async function fetchMusic(year: number) {
           title: row.title,
           artist: row.artist,
           deezerId: row.deezerId!,
-          preview: undefined,
+          previewUrl: undefined, // Renommer 'preview' en 'previewUrl'
           deezerUrl: undefined,
         };
       }
