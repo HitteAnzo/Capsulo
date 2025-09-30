@@ -266,7 +266,7 @@ export async function GET(req: NextRequest) {
   if (previewId) {
     try {
       const meta = await fetch(`https://api.deezer.com/track/${previewId}`, {
-        next: { revalidate: 86400 },
+        cache: "no-store", // <-- modif ici : pas de cache pour éviter les URLs expirées
       }).then((r) => r.json());
 
       const previewUrl = meta?.preview;
@@ -277,9 +277,7 @@ export async function GET(req: NextRequest) {
         );
       }
 
-      const upstream = await fetch(previewUrl, {
-        // Pas de revalidate ici: on streame
-      });
+      const upstream = await fetch(previewUrl);
 
       if (!upstream.ok || !upstream.body) {
         return NextResponse.json(
@@ -288,7 +286,6 @@ export async function GET(req: NextRequest) {
         );
       }
 
-      // On renvoie le flux MP3 depuis notre domaine => pas de CSP externe
       return new NextResponse(upstream.body, {
         headers: {
           "Content-Type": "audio/mpeg",
@@ -333,7 +330,7 @@ export async function GET(req: NextRequest) {
   const payload: TimeCapsule = {
     year,
     events,
-    music, // contient toujours { title, artist, deezerId, preview?, deezerUrl? }
+    music,
     movies,
     breadPrice: bread,
     cigarettePrice: cigarette,
