@@ -1,5 +1,5 @@
 year,title,artist,__parsed_extra,deezerId
-1960,Souvenirs," souvenirs",Johnny Hallyday,80414864
+1960,"Souvenirs souvenirs",Johnny Hallyday,,571109
 1960,Tu t’laisses aller,Charles Aznavour,,3148142
 1960,Itsy Bitsy Petit Bikini,Dalida,,131258148
 1960,Are You Lonesome Tonight,Elvis Presley,,462975322
@@ -16,7 +16,6 @@ year,title,artist,__parsed_extra,deezerId
 1962,Blowin’ in the Wind,Bob Dylan,,75768709
 1963,L’amitié,Françoise Hardy,,539923
 1963,La Javanaise,Serge Gainsbourg,,508426542
-1963,Et moi," et moi"," et moi,Jacques Dutronc",1059326812
 1963,She Loves You,The Beatles,,116348596
 1963,You Really Got Me,The Kinks,,143026320
 1964,Le Pénitencier,Johnny Hallyday,,2329884
@@ -34,14 +33,14 @@ year,title,artist,__parsed_extra,deezerId
 1966,Bang Bang,Sheila,,687712
 1966,Good Vibrations,The Beach Boys,,3091992
 1966,Mr. Tambourine Man,The Byrds,,1015090
-1967,Et moi," et moi"," et moi,Jacques Dutronc",1059326812
+1967,"Et moi, et moi, et moi",Jacques Dutronc,,539703
 1967,Le Sud,Nino Ferrer,,70659551
 1967,Harley Davidson,Brigitte Bardot,,1101462
 1967,Purple Haze,Jimi Hendrix,,4952885
 1967,Light My Fire,The Doors,,3614129
 1968,L’Amérique,Joe Dassin,,561698
 1968,Comme d’habitude,Claude François,,1090312
-1968,Poupée de cire," poupée de son",France Gall,
+1968,"Poupée de cire, poupée de son",France Gall,,639971642
 1968,Hey Jude,The Beatles,,116348632
 1968,White Room,Cream,,1175618
 1969,Les bals populaires,Michel Sardou,,774810502
@@ -61,7 +60,7 @@ year,title,artist,__parsed_extra,deezerId
 1971,Baba O’Riley,The Who,,2121805
 1972,Les divorcés,Michel Delpech,,1150377
 1972,Le lundi au soleil,Claude François,,535660
-1972,Paroles," paroles",Dalida,1650461412
+1972,"Paroles, paroles",Dalida,,71560063
 1972,Rocket Man,Elton John,,1144863
 1972,Angie,The Rolling Stones,,2124880
 1973,Laisse-moi t’aimer,Mike Brant,,3121388
@@ -89,8 +88,7 @@ year,title,artist,__parsed_extra,deezerId
 1977,Rockollection,Laurent Voulzy,,632222
 1977,God Save the Queen,Sex Pistols,,60742395
 1977,London Calling,The Clash,,69924599
-1978,Si maman si,France Gall,,61424388
-1978,Si," maman"," si,Michel Berger",2530079
+1978,"Si maman si",France Gall,,61424388
 1978,Foule sentimentale,Alain Souchon,,3132726
 1978,Stayin’ Alive,Bee Gees,,139138743
 1978,Sultans of Swing,Dire Straits,,2263033
@@ -104,7 +102,6 @@ year,title,artist,__parsed_extra,deezerId
 1980,Il suffira d’un signe,Jean-Jacques Goldman,,596760
 1980,Back in Black,AC/DC,,92720046
 1980,Another One Bites the Dust,Queen,,12206946
-1981,Je t’aimais," je t’aime"," je t’aimerai,Francis Cabrel",
 1981,Vertige de l’amour,Alain Bashung,,2238913
 1981,Quelque chose de Tennessee,Johnny Hallyday,,2461757
 1981,Every Little Thing She Does Is Magic,The Police,,2525869
@@ -130,7 +127,7 @@ year,title,artist,__parsed_extra,deezerId
 1985,Money for Nothing,Dire Straits,,2514681
 1985,Take on Me,A-ha,,664107
 1986,Trois nuits par semaine,Indochine,,1132215
-1986,Voyage," voyage",Desireless,1350231362
+1986,Voyage," voyage",Desireless,4298172
 1986,Ballade de Jim,Alain Souchon,,3370295
 1986,Sledgehammer,Peter Gabriel,,540503442
 1986,Livin’ on a Prayer,Bon Jovi,,538660022
@@ -269,6 +266,7 @@ year,title,artist,__parsed_extra,deezerId
 2013,J’me tire,Maitre Gims,,
 2013,Radioactive,Imagine Dragons,,63510358
 2013,Get Lucky,Daft Punk,,
+2013,,,,65444691
 2014,Saint Claude,Christine and the Queens,,441137162
 2014,Pas là,Vianney,,605642462
 2014,Cosmopolitanie,Soprano,,

@@ -33,7 +33,7 @@ function getDecadeTheme(year: number): DecadeTheme {
         secondaryText: "text-rose-800/90",
         iconBg: "bg-green-200/40",
         subtitleText: "text-orange-950/90 text-shadow-[1px_1px_1px_#ffffff50]",
-        button: "bg-white/20 text-orange-950 border-orange-950/30 hover:bg-white/30",
+        button: "bg-orange-200 text-rose-950 border-rose-950/50 hover:brightness-95",
         iconBorder: "border-rose-950",
       };
     case 1970:
@@ -45,7 +45,7 @@ function getDecadeTheme(year: number): DecadeTheme {
         secondaryText: "text-amber-900/90",
         iconBg: "bg-amber-800/20",
         subtitleText: "text-orange-200/90",
-        button: "text-amber-950 border-amber-950 hover:bg-amber-950/10",
+        button: "bg-[#3D2B24] text-orange-200 border-orange-200/50 hover:brightness-125",
         iconBorder: "border-amber-950",
       };
     case 1980:
@@ -84,17 +84,29 @@ function getDecadeTheme(year: number): DecadeTheme {
         button: "bg-white/70 border border-gray-300 text-gray-700 hover:bg-white",
         iconBorder: "border-slate-800",
       };
-    default: // 2010+ et thème par défaut
+    case 2010:
       return {
-        background: "",
-        card: "bg-gradient-to-b from-white/5 to-transparent border-white/10",
-        titleFont: "font-bold tracking-tighter",
-        primaryText: "text-foreground",
-        secondaryText: "text-muted-foreground",
-        iconBg: "bg-secondary",
-        subtitleText: "text-muted-foreground",
-        button: "bg-secondary text-secondary-foreground border-border hover:bg-primary/20",
-        iconBorder: "border-foreground",
+        background: "bg-slate-900",
+        card: "bg-slate-800 border border-slate-700/50 rounded-xl shadow-lg",
+        titleFont: "font-sans font-bold tracking-tighter text-gray-100",
+        primaryText: "text-blue-400 font-semibold",
+        secondaryText: "text-slate-400",
+        iconBg: "bg-blue-500/10",
+        subtitleText: "text-slate-300",
+        button: "bg-slate-700 border border-slate-600 text-slate-300 hover:bg-slate-600",
+        iconBorder: "border-blue-400",
+      };
+    default: // 2020+ et thème par défaut
+      return {
+        background: "bg-black bg-[radial-gradient(circle_800px_at_50%_200px,rgba(255,255,255,0.08),transparent)]",
+        card: "bg-gray-800/40 backdrop-blur-xl border border-white/10 rounded-3xl",
+        titleFont: "font-sans font-bold tracking-tight text-gray-50",
+        primaryText: "text-gray-200",
+        secondaryText: "text-gray-400",
+        iconBg: "bg-gray-700/50",
+        subtitleText: "text-gray-300",
+        button: "bg-gray-700/50 border border-gray-600 text-gray-300 hover:bg-gray-700",
+        iconBorder: "border-gray-500",
       };
   }
 }
