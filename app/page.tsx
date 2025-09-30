@@ -7,6 +7,7 @@ import HeroSection from "../components/HeroSection";
 import YearInputForm from "../components/YearInputForm";
 import DecadeSelector from "../components/DecadeSelector";
 import FeatureSection from "../components/FeatureSection";
+import ParticlesBackground from "../components/ParticlesBackground";
 
 const MIN_YEAR = 1960;
 const MAX_YEAR = 2025;
@@ -20,7 +21,7 @@ export default function Page() {
   const clampYear = (y: number) => Math.min(MAX_YEAR, Math.max(MIN_YEAR, y));
 
   function go() {
-    const y = clampYear(year || new Date().getFullYear() - 25); // Default to 25 years ago
+    const y = clampYear(year || new Date().getFullYear() - 25);
     router.push(`/year/${y}?lang=${lang}`);
   }
 
@@ -34,14 +35,21 @@ export default function Page() {
 
   return (
     <>
+      {/* Particles.js en fond */}
+      <ParticlesBackground />
+
+      {/* Fond étoilé avec nébuleuse - placé derrière les particules */}
+      <div className="fixed inset-0 -z-20 h-full w-full bg-[#0a101f] bg-[radial-gradient(white_0.5px,transparent_0.5px)] [background-size:20px_20px]"></div>
+      <div className="pointer-events-none fixed inset-0 -z-20 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.15),transparent_50%)]"></div>
+
       <main className="flex flex-col items-center justify-center text-center flex-grow">
         <HeroSection
-          title="C'était mieux avant ?"
+          title="Un voyage dans chaque détail"
           subtitle={t(lang, "subtitle")}
         />
 
         <div
-          className="max-w-md mx-auto flex flex-col items-center gap-4 mt-12 animate-fade-in-up"
+          className="flex w-full max-w-md flex-col items-center gap-6 mt-12 animate-fade-in-up"
           style={{ animationDelay: "300ms" }}
         >
           <YearInputForm

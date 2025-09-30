@@ -5,7 +5,6 @@ import type { TimeCapsule } from "../../../lib/types";
 import { t } from "../../../lib/i18n";
 import type { Lang } from "../../../components/LanguageToggle";
 import SongCard from "../../../components/SongCard";
-// Ajout des nouvelles icônes
 import { Music, Clapperboard, Banknote, Film, X, Wheat, Cigarette, Fuel, ChevronLeft, ChevronRight } from "lucide-react";
 
 // --- DÉBUT : Logique de Thème par Décennie ---
@@ -13,13 +12,12 @@ type DecadeTheme = {
   background: string;
   card: string;
   titleFont: string;
-  // Définir explicitement les couleurs de texte
   primaryText: string;
   secondaryText: string;
   iconBg: string;
-  subtitleText: string; // Ajout de la couleur du sous-titre
-  button: string; // Ajout du style pour les boutons
-  iconBorder: string; // NOUVEAU : Couleur de la bordure de l'icône
+  subtitleText: string;
+  button: string;
+  iconBorder: string;
 };
 
 function getDecadeTheme(year: number): DecadeTheme {
@@ -28,19 +26,19 @@ function getDecadeTheme(year: number): DecadeTheme {
   switch (decade) {
     case 1960:
       return {
-        background: "bg-gradient-to-br from-rose-400 via-fuchsia-500 to-indigo-500", // Floral gradient
-        card: "bg-white/80 backdrop-blur-md border border-white/20 rounded-3xl shadow-lg", // Soft, blurry card
-        titleFont: "font-dm-serif text-white text-shadow-[2px_2px_4px_#00000080]", // Groovy font with shadow
-        primaryText: "text-rose-950 font-bold", // Dark rosy-brown text
+        background: `bg-orange-200 bg-[url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80' width='80' height='80'%3e%3cpath fill='%23e58948' fill-opacity='0.4' d='M40 0c22.09 0 40 17.91 40 40S62.09 80 40 80 0 62.09 0 40S17.91 0 40 0zm0 8c17.67 0 32 14.33 32 32s-14.33 32-32 32S8 57.67 8 40 22.33 8 40 8zm0 8c13.25 0 24 10.75 24 24s-10.75 24-24 24-24-10.75-24-24 10.75-24 24-24zm0 8c8.84 0 16 7.16 16 16s-7.16 16-16 16-16-7.16-16-16 7.16-16 16-16z'%3e%3c/path%3e%3c/svg%3e")]`,
+        card: "bg-white/80 backdrop-blur-md border border-white/20 rounded-3xl shadow-lg",
+        titleFont: "font-dm-serif text-orange-950 text-shadow-[1px_1px_2px_#ffffff80]",
+        primaryText: "text-rose-950 font-bold",
         secondaryText: "text-rose-800/90",
-        iconBg: "bg-green-200/40", // Pastel green for "foliage"
-        subtitleText: "text-white/90 text-shadow-[1px_1px_2px_#00000050]",
-        button: "bg-white/20 text-white border-white/30 hover:bg-white/30", // Glassy button
+        iconBg: "bg-green-200/40",
+        subtitleText: "text-orange-950/90 text-shadow-[1px_1px_1px_#ffffff50]",
+        button: "bg-white/20 text-orange-950 border-orange-950/30 hover:bg-white/30",
         iconBorder: "border-rose-950",
       };
     case 1970:
       return {
-        background: "bg-[#3D2B24] bg-[radial-gradient(#785549_1px,transparent_1px)] bg-[size:16px_16px]", // Brown with a dot pattern
+        background: "bg-[#3D2B24] bg-[radial-gradient(#785549_1px,transparent_1px)] bg-[size:16px_16px]",
         card: "bg-orange-100/80 backdrop-blur-sm border border-orange-200/50 rounded-2xl shadow-lg",
         titleFont: "font-bebas-neue tracking-wider text-orange-200",
         primaryText: "text-amber-950 font-bold",
@@ -76,15 +74,15 @@ function getDecadeTheme(year: number): DecadeTheme {
       };
     case 2000:
       return {
-        background: "bg-gradient-to-b from-slate-400 to-slate-600",
-        card: "bg-slate-100 border border-slate-400 rounded-lg shadow-lg",
-        titleFont: "font-sans font-bold text-black",
-        primaryText: "text-blue-700 font-bold",
-        secondaryText: "text-black",
-        iconBg: "bg-slate-300",
-        subtitleText: "text-black",
-        button: "bg-slate-200 text-slate-800 border-slate-300 hover:bg-slate-300",
-        iconBorder: "border-blue-700",
+        background: "bg-gradient-to-br from-sky-50/50 via-white to-blue-100/50",
+        card: "bg-white/50 backdrop-blur-lg border border-white/30 rounded-2xl shadow-lg",
+        titleFont: "font-sans font-bold tracking-tight",
+        primaryText: "text-slate-800",
+        secondaryText: "text-slate-600",
+        iconBg: "bg-white/50",
+        subtitleText: "text-slate-700",
+        button: "bg-white/70 border border-gray-300 text-gray-700 hover:bg-white",
+        iconBorder: "border-slate-800",
       };
     default: // 2010+ et thème par défaut
       return {
@@ -102,7 +100,6 @@ function getDecadeTheme(year: number): DecadeTheme {
 }
 // --- FIN : Logique de Thème ---
 
-// --- Le composant de carte ---
 const InfoCard = ({
   icon,
   title,
@@ -110,8 +107,8 @@ const InfoCard = ({
   delay,
   className = "",
   themeClasses = "",
-  theme, // Passer l'objet de thème complet
-  headerAccessory, // Nouvel élément à droite du titre
+  theme,
+  headerAccessory,
 }: {
   icon: React.ReactNode;
   title: string;
@@ -119,8 +116,8 @@ const InfoCard = ({
   delay: string;
   className?: string;
   themeClasses?: string;
-  theme: DecadeTheme; // Définir le type
-  headerAccessory?: React.ReactNode; // Définir le type
+  theme: DecadeTheme;
+  headerAccessory?: React.ReactNode;
 }) => (
   <div
     className={`relative overflow-hidden p-4 sm:p-6 shadow-2xl animate-fade-in-up ${themeClasses} ${className}`}
@@ -131,42 +128,37 @@ const InfoCard = ({
         <div className={`flex h-10 w-10 sm:h-12 sm:w-12 shrink-0 items-center justify-center rounded-xl border-2 ${theme.iconBorder}`}>
           {icon}
         </div>
-        {/* On utilise la couleur du thème ici */}
         <h3 className={`text-lg sm:text-xl font-semibold ${theme.primaryText}`}>{title}</h3>
       </div>
       {headerAccessory && <div>{headerAccessory}</div>}
     </div>
-    {/* Et ici aussi */}
     <div className={theme.secondaryText}>{children}</div>
   </div>
 );
 
-// --- NOUVEAU : Composant pour un élément de prix ---
 const PriceItem = ({
   icon,
   label,
   price,
   currency,
   realPrice2025,
-  theme, // Passer l'objet de thème complet
+  theme,
 }: {
   icon: React.ReactNode;
   label: string;
   price?: number;
   currency: string;
   realPrice2025?: number;
-  theme: DecadeTheme; // Définir le type
+  theme: DecadeTheme;
 }) => {
   if (price === undefined) return null;
 
   return (
     <div className="flex items-center gap-4">
-      {/* On utilise la couleur de fond d'icône du thème */}
       <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${theme.iconBg}`}>
         {icon}
       </div>
       <div className="flex-grow">
-        {/* On utilise les couleurs du thème ici */}
         <p className={`text-sm font-medium ${theme.secondaryText}`}>{label}</p>
         <p className={`text-lg font-bold ${theme.primaryText}`}>
           {price.toFixed(2)} {currency}
@@ -181,8 +173,6 @@ const PriceItem = ({
   );
 };
 
-
-// --- Le composant pour l'aperçu du film ---
 const MovieModal = ({
   movie,
   onClose,
@@ -232,7 +222,7 @@ export default function YearPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showEUR, setShowEUR] = useState(true);
-  const [selectedMovie, setSelectedMovie] = useState<TimeCapsule["movies"][0] | null>(null); // État pour le film sélectionné
+  const [selectedMovie, setSelectedMovie] = useState<TimeCapsule["movies"][0] | null>(null);
 
   useEffect(() => {
     if (!y || Number.isNaN(y)) return;
@@ -268,7 +258,6 @@ export default function YearPage() {
     ? data!.gazolePrice!.frf_litre! / 6.55957
     : undefined;
 
-  // Appliquer le thème
   const theme = getDecadeTheme(y);
 
   const canGoBack = y > 1960;
@@ -276,37 +265,35 @@ export default function YearPage() {
 
   return (
     <>
-      {/* --- Flèches de navigation --- */}
-      {canGoBack && (
-        <button
-          onClick={() => router.push(`/year/${y - 1}?lang=${lang}`)}
-          className="fixed left-2 sm:left-4 top-1/2 -translate-y-1/2 z-40 p-2 rounded-full bg-black/20 hover:bg-black/40 text-white transition-colors"
-          aria-label="Année précédente"
-        >
-          <ChevronLeft size={32} />
-        </button>
-      )}
-      {canGoForward && (
-        <button
-          onClick={() => router.push(`/year/${y + 1}?lang=${lang}`)}
-          className="fixed right-2 sm:right-4 top-1/2 -translate-y-1/2 z-40 p-2 rounded-full bg-black/20 hover:bg-black/40 text-white transition-colors"
-          aria-label="Année suivante"
-        >
-          <ChevronRight size={32} />
-        </button>
-      )}
-
-      {/* Le fond dynamique */}
       <div className={`fixed inset-0 -z-20 transition-all duration-1000 ${theme.background}`} />
       <main className="container mx-auto max-w-5xl py-8 sm:py-16">
-        {/* --- Titre de la page --- */}
         <div
           className="text-center mb-12 sm:mb-16 animate-fade-in-up"
           style={{ animationDelay: "100ms" }}
         >
-          <h1 className={`text-4xl sm:text-5xl md:text-6xl text-foreground ${theme.titleFont}`}>
-            {y}
-          </h1>
+          <div className="flex items-center justify-center gap-4 sm:gap-8">
+            <button
+              onClick={() => canGoBack && router.push(`/year/${y - 1}?lang=${lang}`)}
+              className={`p-2 rounded-full transition-opacity ${canGoBack ? 'opacity-70 hover:opacity-100' : 'opacity-0 cursor-default'}`}
+              aria-label="Année précédente"
+              disabled={!canGoBack}
+            >
+              <ChevronLeft size={32} className={theme.subtitleText} />
+            </button>
+
+            <h1 className={`text-4xl sm:text-5xl md:text-6xl text-foreground ${theme.titleFont}`}>
+              {y}
+            </h1>
+
+            <button
+              onClick={() => canGoForward && router.push(`/year/${y + 1}?lang=${lang}`)}
+              className={`p-2 rounded-full transition-opacity ${canGoForward ? 'opacity-70 hover:opacity-100' : 'opacity-0 cursor-default'}`}
+              aria-label="Année suivante"
+              disabled={!canGoForward}
+            >
+              <ChevronRight size={32} className={theme.subtitleText} />
+            </button>
+          </div>
           <p className={`mt-2 sm:mt-4 max-w-2xl mx-auto text-base sm:text-lg ${theme.subtitleText}`}>
             {t(lang, "subtitle")}
           </p>
@@ -321,7 +308,6 @@ export default function YearPage() {
 
         {data && (
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            {/* --- Carte Musique --- */}
             <InfoCard
               icon={<Music className={`h-6 w-6 ${theme.primaryText}`} />}
               title={t(lang, "music")}
@@ -344,7 +330,6 @@ export default function YearPage() {
               </div>
             </InfoCard>
 
-            {/* --- Carte Coût de la vie --- */}
             <InfoCard
               icon={<Banknote className={`h-6 w-6 ${theme.primaryText}`} />}
               title={t(lang, "lifePrices")}
@@ -356,7 +341,6 @@ export default function YearPage() {
               )}
             >
               <div className="flex flex-col gap-6">
-                {/* Liste des prix */}
                 <PriceItem
                   icon={<Wheat size={20} />}
                   label="Baguette"
@@ -384,7 +368,6 @@ export default function YearPage() {
               </div>
             </InfoCard>
 
-            {/* --- Carte Cinéma --- */}
             <InfoCard
               icon={<Film className={`h-6 w-6 ${theme.primaryText}`} />}
               title={t(lang, "movies")}
@@ -399,7 +382,7 @@ export default function YearPage() {
                       key={i}
                       onClick={(e) => {
                         e.preventDefault();
-                        setSelectedMovie(mv); // Ouvre la modale au clic
+                        setSelectedMovie(mv);
                       }}
                       title={mv.title}
                       className="cursor-pointer"
@@ -422,7 +405,6 @@ export default function YearPage() {
         )}
       </main>
 
-      {/* Affiche la modale si un film est sélectionné */}
       {selectedMovie && (
         <MovieModal
           movie={selectedMovie}

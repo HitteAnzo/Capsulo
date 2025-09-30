@@ -24,7 +24,7 @@ export default function YearInputForm({
         e.preventDefault();
         onSubmit();
       }}
-      className="flex w-full items-center rounded-full border border-white/10 bg-white/5 p-2 shadow-lg backdrop-blur-sm"
+      className="flex w-full items-center rounded-md border border-blue-500/30 bg-blue-950/30 p-2 shadow-lg backdrop-blur-sm transition-all focus-within:border-blue-500/80 focus-within:bg-blue-950/50"
     >
       <input
         type="number"
@@ -32,13 +32,13 @@ export default function YearInputForm({
         onChange={(e) => onYearChange(e.target.value)}
         onKeyDown={onKeyDown}
         placeholder={placeholder}
-        className="flex-grow bg-transparent focus:outline-none placeholder:text-muted-foreground/50 px-4 text-lg [-moz-appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+        className="flex-grow bg-transparent px-4 text-lg font-mono text-white placeholder:text-blue-300/40 focus:outline-none [-moz-appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
         min={MIN_YEAR}
         max={MAX_YEAR}
       />
       <button
         type="submit"
-        className="rounded-full bg-primary px-8 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+        className="rounded-md bg-blue-600 px-6 py-2 text-sm font-semibold text-white transition-colors hover:bg-blue-500"
       >
         {buttonText}
       </button>
