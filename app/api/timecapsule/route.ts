@@ -100,7 +100,6 @@ async function fetchMusic(year: number) {
           title: j.title ?? row.title,
           artist: j.artist?.name ?? row.artist,
           deezerId: String(j.id),
-          // On garde la vraie URL pour debug, mais on conseillera le proxy en front
           preview: j.preview || undefined,
           deezerUrl: j.link || undefined,
         };
@@ -255,8 +254,6 @@ async function fetchFashion(year: number, lang: string) {
 
 // ----------------------
 // GET handler
-//  - ?previewId=123 : stream le MP3 Deezer (proxy côté serveur)
-//  - sinon : renvoie la capsule pour l'année
 // ----------------------
 export async function GET(req: NextRequest) {
   const url = new URL(req.url);
@@ -266,7 +263,7 @@ export async function GET(req: NextRequest) {
   if (previewId) {
     try {
       const meta = await fetch(`https://api.deezer.com/track/${previewId}`, {
-        cache: "no-store", // <-- modif ici : pas de cache pour éviter les URLs expirées
+        cache: "no-store", // URL toujours fraîche
       }).then((r) => r.json());
 
       const previewUrl = meta?.preview;
@@ -277,9 +274,24 @@ export async function GET(req: NextRequest) {
         );
       }
 
-      const upstream = await fetch(previewUrl);
+      // Ajout retry + timeout
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 8000);
 
-      if (!upstream.ok || !upstream.body) {
+      let upstream: Response | null = null;
+      for (let attempt = 0; attempt < 2; attempt++) {
+        try {
+          upstream = await fetch(previewUrl, {
+            signal: controller.signal,
+            cache: "no-store",
+          });
+          if (upstream.ok && upstream.body) break;
+        } catch {}
+        await new Promise((r) => setTimeout(r, 150));
+      }
+      clearTimeout(timeout);
+
+      if (!upstream || !upstream.ok || !upstream.body) {
         return NextResponse.json(
           { error: "Impossible de récupérer le flux preview." },
           { status: 502 }
