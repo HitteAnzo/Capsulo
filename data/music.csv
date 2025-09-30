@@ -1,4 +1,5 @@
 year,title,artist,__parsed_extra,deezerId
+1960,,,,136710424
 1960,"Souvenirs souvenirs",Johnny Hallyday,,571109
 1960,Tu t’laisses aller,Charles Aznavour,,3148142
 1960,Itsy Bitsy Petit Bikini,Dalida,,131258148
@@ -9,40 +10,49 @@ year,title,artist,__parsed_extra,deezerId
 1961,Belles! Belles! Belles!,Claude François,,5702259
 1961,Hit the Road Jack,Ray Charles,,62882810
 1961,Surfin’ USA,The Beach Boys,,3091966
+1962,,,,44972281
 1962,La Bohème,Charles Aznavour,,3413187
 1962,Le temps des fleurs,Dalida,,139876159
 1962,Santiano,Hugues Aufray,,2235136
 1962,Satisfaction,The Rolling Stones,,7677778
 1962,Blowin’ in the Wind,Bob Dylan,,75768709
+1963,,,,4246249
 1963,L’amitié,Françoise Hardy,,539923
 1963,La Javanaise,Serge Gainsbourg,,508426542
 1963,She Loves You,The Beatles,,116348596
 1963,You Really Got Me,The Kinks,,143026320
+1963,,,,72518470
+1964,,,,3091964
 1964,Le Pénitencier,Johnny Hallyday,,2329884
 1964,Amsterdam,Jacques Brel,,121672886
 1964,Sacré Charlemagne,France Gall,,639971872
 1964,Baby Love,The Supremes,,1182497
 1964,The House of the Rising Sun,The Animals,,3155135
+1965,,,,141165331
 1965,L’amour avec toi,Michel Polnareff,,1117107
 1965,Tombe la neige,Adamo,,854688952
 1965,Le temps de l’amour,Françoise Hardy,,1384472042
 1965,Like a Rolling Stone,Bob Dylan,,14477354
 1965,(I Can’t Get No) Satisfaction,The Rolling Stones,,7677778
+1966,,,,922605
 1966,Les Sucettes,Serge Gainsbourg,,508426752
 1966,Chez Laurette,Michel Delpech,,2232685
 1966,Bang Bang,Sheila,,687712
 1966,Good Vibrations,The Beach Boys,,3091992
 1966,Mr. Tambourine Man,The Byrds,,1015090
+1967,,,,74245835
 1967,"Et moi, et moi, et moi",Jacques Dutronc,,539703
 1967,Le Sud,Nino Ferrer,,70659551
 1967,Harley Davidson,Brigitte Bardot,,1101462
 1967,Purple Haze,Jimi Hendrix,,4952885
 1967,Light My Fire,The Doors,,3614129
+1968,,,,1762624107
 1968,L’Amérique,Joe Dassin,,561698
 1968,Comme d’habitude,Claude François,,1090312
 1968,"Poupée de cire, poupée de son",France Gall,,639971642
 1968,Hey Jude,The Beatles,,116348632
 1968,White Room,Cream,,1175618
+1969,,,,1117110
 1969,Les bals populaires,Michel Sardou,,774810502
 1969,Ce n’est rien,Julien Clerc,,3105615
 1969,Que je t’aime,Johnny Hallyday,,14113667
@@ -50,205 +60,249 @@ year,title,artist,__parsed_extra,deezerId
 1969,Space Oddity,David Bowie,,107465566
 1970,L’Amérique,Joe Dassin,,561698
 1970,Les bals populaires,Michel Sardou,,774810502
-1970,C’est ma chanson,Julien Clerc,,
+1970,,,,66153045
+1970,,,,2716190052
 1970,Bridge Over Troubled Water,Simon & Garfunkel,,13174764
 1970,Child in Time,Deep Purple,,3230170
+1971,,,,769749602
 1971,Je suis malade,Serge Lama,,2326603
 1971,Les plaisirs démodés,Charles Aznavour,,625721602
 1971,Mamy Blue,Nicoletta,,1124189
 1971,Wish You Were Here,Pink Floyd,,116914042
 1971,Baba O’Riley,The Who,,2121805
+1972,,,,6429605
 1972,Les divorcés,Michel Delpech,,1150377
 1972,Le lundi au soleil,Claude François,,535660
 1972,"Paroles, paroles",Dalida,,71560063
 1972,Rocket Man,Elton John,,1144863
 1972,Angie,The Rolling Stones,,2124880
+1973,,,,97081744
 1973,Laisse-moi t’aimer,Mike Brant,,3121388
 1973,Les rois mages,Sheila,,739619
 1973,Une belle histoire,Michel Fugain,,2199303667
 1973,Waterloo,ABBA,,76376889
 1973,Stairway to Heaven,Led Zeppelin,,88003859
+1974,,,,535691
 1974,L’été indien,Joe Dassin,,561683
 1974,La maladie d’amour,Michel Sardou,,1086370
 1974,Swiss Kiss,Patrick Juvet,,84869781
 1974,Bohemian Rhapsody,Queen,,9997018
 1974,Rebel Rebel,David Bowie,,3155590
+1975,,,,141165473
 1975,Je suis malade,Serge Lama,,2326603
 1975,La ballade des gens heureux,Gérard Lenorman,,513829202
 1975,Vancouver,Véronique Sanson,,800659
 1975,Shine On You Crazy Diamond,Pink Floyd,,116914036
 1975,Go Your Own Way,Fleetwood Mac,,63480990
+1976,,,,2254116
 1976,Laisse béton,Renaud,,69125500
 1976,L’Aziza,Daniel Balavoine,,886349
 1976,Petite Marie,Francis Cabrel,,551991
 1976,Hotel California,Eagles,,426703682
 1976,Beth,Kiss,,1550816162
-1977,Petite Marie,Francis Cabrel,,551991
+1977,,,,705016622
+1977,,,,1150383
 1977,Ma préférence,Julien Clerc,,3105622
 1977,Rockollection,Laurent Voulzy,,632222
 1977,God Save the Queen,Sex Pistols,,60742395
 1977,London Calling,The Clash,,69924599
+1978,,,,781563062
+1978,,,,1357589612
 1978,"Si maman si",France Gall,,61424388
 1978,Foule sentimentale,Alain Souchon,,3132726
 1978,Stayin’ Alive,Bee Gees,,139138743
 1978,Sultans of Swing,Dire Straits,,2263033
+1979,,,,4077573
 1979,Oxygène,Jean-Michel Jarre,,2588902842
 1979,Gaby oh Gaby,Alain Bashung,,122894442
 1979,Laisse béton,Renaud,,69125500
 1979,Hot Stuff,Donna Summer,,538706952
 1979,Roxanne,The Police,,2525877
+1980,,,,116914094
 1980,La bombe humaine,Téléphone,,3256040
 1980,Le chanteur,Daniel Balavoine,,886301
 1980,Il suffira d’un signe,Jean-Jacques Goldman,,596760
 1980,Back in Black,AC/DC,,92720046
 1980,Another One Bites the Dust,Queen,,12206946
+1981,,,,14268341
+1981,,,,886320
 1981,Vertige de l’amour,Alain Bashung,,2238913
 1981,Quelque chose de Tennessee,Johnny Hallyday,,2461757
 1981,Every Little Thing She Does Is Magic,The Police,,2525869
 1981,Gloria,U2,,1579119
+1982,,,,13394789
 1982,L’aventurier,Indochine,,1132150
 1982,Morgane de toi,Renaud,,69125492
 1982,Débranche,France Gall,,61397209
 1982,Billie Jean,Michael Jackson,,4603408
 1982,Africa,Toto,,1079668
+1983,,,,4603408
 1983,Tombé pour la France,Étienne Daho,,110488356
 1983,Trois nuits par semaine,Indochine,,1132215
 1983,Quand la musique est bonne,Jean-Jacques Goldman,,7120489
 1983,Like a Virgin,Madonna,,678336
 1983,Sweet Dreams,Eurythmics,,561836
+1984,,,,72194071
 1984,Décadanse,Serge Gainsbourg,,508426792
 1984,Débranche,France Gall,,61397209
 1984,Envole-moi,Jean-Jacques Goldman,,730187022
 1984,Born in the U.S.A.,Bruce Springsteen,,15586213
 1984,Purple Rain,Prince,,374283061
+1985,,,,639505082
 1985,Libertine,Mylène Farmer,,2230592
 1985,L’amour à la plage,Niagara,,984876
 1985,Quelque chose de Tennessee,Johnny Hallyday,,2461757
 1985,Money for Nothing,Dire Straits,,2514681
 1985,Take on Me,A-ha,,664107
+1986,,,,2838140
 1986,Trois nuits par semaine,Indochine,,1132215
 1986,Voyage," voyage",Desireless,4298172
 1986,Ballade de Jim,Alain Souchon,,3370295
 1986,Sledgehammer,Peter Gabriel,,540503442
 1986,Livin’ on a Prayer,Bon Jovi,,538660022
 1987,Encore et encore,Francis Cabrel,,72064788
+1987,,,,678372
 1987,Mademoiselle chante le blues,Patricia Kaas,,2425929
 1987,L’envie,Johnny Hallyday,,355709931
 1987,Welcome to the Jungle,Guns N’ Roses,,518458092
 1987,Faith,George Michael,,8146779
 1988,Joe le taxi,Vanessa Paradis,,2202840
+1988,,,,7313318
 1988,Marcia Baïla,Les Rita Mitsouko,,355774881
 1988,Là-bas,Jean-Jacques Goldman & Sirima,,582157
 1988,Desire,U2,,2963248
 1988,One Moment in Time,Whitney Houston,,2795612
+1989,,,,309174
 1989,Sans contrefaçon,Mylène Farmer,,2157280
 1989,Canary Bay,Indochine,,1132016
-1989,N’oubliez jamais,Florent Pagny,,
+1989,,,,86400933
 1989,Another Day in Paradise,Phil Collins,,134036248
 1989,Like a Prayer,Madonna,,664507
+1990,,,,1271832922
 1990,Bouge de là,MC Solaar,,1410517042
 1990,Savoir aimer,Florent Pagny,,984192
 1990,Il suffira d’un signe,Jean-Jacques Goldman,,596760
 1990,Smells Like Teen Spirit,Nirvana,,13791930
 1990,Vision of Love,Mariah Carey,,596011
-1991,Le monde est stone,Patricia Kaas,,
+1991,,,,136334560
+1991,Le monde est stone,Patricia Kaas,,2425914
 1991,Le vent nous portera,Noir Désir,,14352333
 1991,Je danse le mia,IAM,,91045659
 1991,Alive,Pearl Jam,,7675130
 1991,Give It Away,Red Hot Chili Peppers,,725837
+1992,,,,15593566
 1992,Obsolète,MC Solaar,,1490805682
 1992,Petite Marie (live),Francis Cabrel,,1554083792
 1992,Pour que tu m’aimes encore,Céline Dion,,4762933
 1992,Creep,Radiohead,,138547415
 1992,Man on the Moon,R.E.M.,,121921384
+1993,,,,7675403
 1993,Qu’est-ce que t’es belle,Marc Lavoine & Catherine Ringer,,771985002
 1993,Plus que tout au monde,Pascal Obispo,,2191141247
 1993,Zen,Zazie,,3552719791
 1993,Girls & Boys,Blur,,3102138
+1994,,,,61723285
 1993,Cryin’,Aerosmith,,2246520677
 1994,Je danse le mia,IAM,,91045659
 1994,Désenchantée,Mylène Farmer,,2425807
 1994,L’autre finistère,Les Innocents,,355615171
 1994,Wonderwall,Oasis,,985745702
 1994,Basket Case,Green Day,,678044
-1995,Around the World,Daft Punk,,
+1995,,,,952788
+1995,Around the World,Daft Punk,,3129775
 1995,Un jour en France,Noir Désir,,85986305
 1995,Nouveau Western,MC Solaar,,1490805692
 1995,You Oughta Know,Alanis Morissette,,109843288
 1995,California Love,2Pac,,87960517
+1996,,,,1915408647
 1996,Simple et Funky,Alliance Ethnik,,3088069
 1996,Aïcha,Khaled,,921886
 1996,Pour que tu m’aimes encore,Céline Dion,,4762933
 1996,Wannabe,Spice Girls,,3133738
 1996,Where It’s At,Beck,,1158915
+1997,,,,626417
 1997,Un point c’est toi,Zazie,,3552719771
 1997,Double enfance,Julien Clerc,,136331656
 1997,Allumer le feu,Johnny Hallyday,,921379
 1997,Karma Police,Radiohead,,138539981
 1997,Bitter Sweet Symphony,The Verve,,398570642
+1998,,,,1939641407
 1998,La tribu de Dana,Manau,,2150228
 1998,Tellement je t’aime,Faudel,,391533072
 1998,Tomber la chemise,Zebda,,2277531
 1998,…Baby One More Time,Britney Spears,,540175
 1998,La Copa de la Vida,Ricky Martin,,15215306
 1999,Qui est l’exemple ?,Rohff,,3097549
+1999,,,,434625962
 1999,J’t’emmène au vent,Louise Attaque,,983238
 1999,S’il suffisait d’aimer,Céline Dion,,627441
 1999,I Want It That Way,Backstreet Boys,,13141170
 1999,My Name Is,Eminem,,1109729
+2000,,,,82241406
 2000,En apesanteur,Calogero,,132629150
 2000,J’ai demandé à la lune,Indochine,,870090
 2000,Sang pour sang,Johnny Hallyday,,922442
 2000,Yellow,Coldplay,,3128096
 2000,In the End,Linkin Park,,676183
+2001,,,,2122532
 2001,Le chemin,Kyo,,614689
 2001,Sous le vent,Garou & Céline Dion,,871455
 2001,Toute la musique que j’aime (live),Johnny Hallyday,,785820972
 2001,Fallin’,Alicia Keys,,959183
 2001,Whenever Wherever,Shakira,,15211178
+2002,,,,15211178
 2002,Ma liberté de penser,Florent Pagny,,983377
 2002,Si je m’en sors,Julie Zenatti,,2204699
 2002,Au soleil,Jenifer,,880664
 2002,Complicated,Avril Lavigne,,15587465
 2002,Lose Yourself,Eminem,,1109731
+2003,,,,969494
 2003,Caravane,Raphaël,,3129431
 2003,Ma philosophie,Amel Bent,,565420
 2003,Si seulement je pouvais lui manquer,Calogero,,132629132
 2003,Crazy in Love,Beyoncé,,609244
 2003,Hey Ya!,Outkast,,628266
+2004,,,,629466
 2004,J’ai demandé à la lune,Indochine,,870090
 2004,Parce qu’on vient de loin,Corneille,,138782813
 2004,J’en ai marre,Alizée,,506307262
 2004,This Love,Maroon 5,,1165301
 2004,Boulevard of Broken Dreams,Green Day,,6611231
-2005,La main sur le cœur,Sinik,,
+2005,,,,1161005
+2005,La main sur le cœur,Sinik,,15015536
 2005,La femme chocolat,Olivia Ruiz,,2174845
-2005,Qui peut le nier,La Fouine,,
+2005,,,,983450
 2005,Fix You,Coldplay,,3106505
 2005,Feel Good Inc.,Gorillaz,,3129407
 2006,On s’attache,Christophe Maé,,790933
+2006,,,,88897841
 2006,L’hymne de nos campagnes,Tryo,,1147865632
 2006,Marie,Johnny Hallyday,,7371095
 2006,Dani California,Red Hot Chili Peppers,,680516
 2006,SexyBack,Justin Timberlake,,15489383
+2007,,,,925106
 2007,Avant qu’elle parte,Sexion d’Assaut,,16186932
 2007,Femme de couleur,Shy’m,,1420536292
 2007,Ma gueule (live),Johnny Hallyday,,3466071611
 2007,Umbrella,Rihanna,,925106
 2007,Stronger,Kanye West,,1178682
-2008,Hey Mama,Soprano,,
+2008,,,,1855507607
+2008,Hey Mama,Soprano,,584297082
 2008,C’est chelou,Zaho,,2243981367
 2008,Je veux te voir,Yelle,,3107368
 2008,Poker Face,Lady Gaga,,2603558
 2008,Use Somebody,Kings of Leon,,2924841
+2009,,,,3148168
 2009,Perdu d’avance,Orelsan,,3766762
 2009,Comme des enfants,Cœur de Pirate,,2517277181
 2009,Ça n’finira jamais,Johnny Hallyday,,559287062
 2009,I Gotta Feeling,Black Eyed Peas,,4619466
-2009,Love Story,Taylor Swift,,
+2009,Love Story,Taylor Swift,,2917264
+2010,,,,4764905
 2010,Alors on danse,Stromae,,6297555
 2010,Désolé,Sexion d’Assaut,,5639256
-2010,Je veux,Zaz,,17199784
+2010,,,,60741780
+2011,,,,14405185
 2010,Firework,Katy Perry,,6812361
 2010,Just the Way You Are,Bruno Mars,,8011850
 2011,My name is Stain,Shaka Ponk,,981087092
@@ -256,6 +310,7 @@ year,title,artist,__parsed_extra,deezerId
 2011,Nuit 17 à 52,Christine and the Queens,,441137242
 2011,Rolling in the Deep,Adele,,8086126
 2011,Party Rock Anthem,LMFAO,,12565420
+2012,,,,17826508
 2012,Dernière danse,Indila,,74427067
 2012,Menace de mort,Youssoupha,,13759301
 2012,Color Gitano,Kendji Girac,,98356862
@@ -263,26 +318,30 @@ year,title,artist,__parsed_extra,deezerId
 2012,Video Games,Lana Del Rey,,15425694
 2013,Formidable,Stromae,,69879254
 2013,Dernière danse,Indila,,74427067
-2013,J’me tire,Maitre Gims,,
+2013,,,,66609426
+2013,J’me tire,Maitre Gims,,72717406
 2013,Radioactive,Imagine Dragons,,63510358
-2013,Get Lucky,Daft Punk,,
 2013,,,,65444691
 2014,Saint Claude,Christine and the Queens,,441137162
 2014,Pas là,Vianney,,605642462
-2014,Cosmopolitanie,Soprano,,
+2014,Cosmopolitanie,Soprano,,576822202
 2014,Thinking Out Loud,Ed Sheeran,,79875064
+2014,,,,3310221001
 2014,Stay With Me,Sam Smith,,111780376
 2015,Avenir,Louane,,3260573291
 2015,Le chant des sirènes,Fréro Delavega,,81263834
 2015,Come,Jain,,109176400
 2015,Can’t Feel My Face,The Weeknd,,106506516
 2015,Hotline Bling,Drake,,124603286
+2015,,,,3027762121
+2016,,,,124237488
 2016,Naha,PNL,,132123604
 2016,Tchikita,Jul,,132434634
 2016,Makeba,Jain,,109176426
 2016,Cheap Thrills,Sia,,118986142
 2016,Stressed Out,Twenty One Pilots,,99976952
 2017,Macarena,Damso,,354918041
+2017,,,,623698142
 2017,On verra,Nekfeu,,101764813
 2017,Fête de trop,Eddy de Pretto,,457266502
 2017,New Rules,Dua Lipa,,366297921
@@ -290,8 +349,10 @@ year,title,artist,__parsed_extra,deezerId
 2018,Balance ton quoi,Angèle,,546875572
 2018,Djadja,Aya Nakamura,,576851222
 2018,Kid,Eddy de Pretto,,457266442
+2018,,,,447098092
 2018,Rockstar,Post Malone,,491446942
 2018,Bad Guy,Billie Eilish,,655095912
+2019,,,,619949882
 2019,La vie qu’on mène,Ninho,,652380172
 2019,La grenade,Clara Luciani,,615570352
 2019,1000°C,Lomepal,,583177702
@@ -300,14 +361,17 @@ year,title,artist,__parsed_extra,deezerId
 2020,Plus jamais,Aya Nakamura,,1137703312
 2020,Flou,Angèle,,546875672
 2020,Beau-papa,Vianney,,1086722842
+2020,,,,923495502
 2020,Don’t Start Now,Dua Lipa,,1124841652
 2020,Blinding Lights,The Weeknd,,908604612
 2021,Marché noir,SCH,,1278323122
 2021,La kiffance,Naps,,1253711502
 2021,Amour censure,Hoshi,,1705864297
+2021,,,,1015793062
 2021,Good 4 U,Olivia Rodrigo,,1378342622
 2021,Kiss Me More,Doja Cat,,1410738172
 2022,La quête,Orelsan,,1544258312
+2022,,,,1366461822
 2022,Best Life,Naps,,1503613682
 2022,Respire encore,Clara Luciani,,1366461822
 2022,As It Was,Harry Styles,,1703487577
@@ -315,10 +379,12 @@ year,title,artist,__parsed_extra,deezerId
 2023,Cartier,Zola,,2045327247
 2023,BXL ZOO,Damso,,3182929901
 2023,Redescends,SDM,,1820662967
+2023,,,,2111636447
 2023,Meltdown,Travis Scott,,2386586075
 2023,Flowers,Miley Cyrus,,2105158337
 2024,Hypé,Aya Nakamura,,2632070632
-2024,Casablanca,Soolking,,
+2024,Casablanca,Soolking,,460345685
 2024,Kassav,Gazo,,1198840162
 2024,Lunch,Billie Eilish,,2801558032
 2024,First Person Shooter,Drake,,2486117571
+2024,,,,3040002541
