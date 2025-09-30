@@ -45,7 +45,7 @@ function getDecadeTheme(year: number): DecadeTheme {
         secondaryText: "text-amber-900/90",
         iconBg: "bg-amber-800/20",
         subtitleText: "text-orange-200/90",
-        button: "bg-orange-200/20 text-orange-100 border-orange-200/30 hover:bg-orange-200/30",
+        button: "text-amber-950 border-amber-950 hover:bg-amber-950/10",
         iconBorder: "border-amber-950",
       };
     case 1980:
@@ -337,7 +337,7 @@ export default function YearPage() {
               themeClasses={theme.card}
               theme={theme}
               headerAccessory={(hasFRF || hasCigaretteFRF || hasGazoleFRF) && (
-                <button className={`px-3 py-1 text-xs rounded-full border transition-colors ${theme.button}`} onClick={() => setShowEUR(!showEUR)}>{showEUR ? "FRF" : "EUR"}</button>
+                <button className={`px-3 py-1 text-xs rounded-full border transition-colors ${theme.button}`} onClick={() => setShowEUR(!showEUR)}>FRF/EUR</button>
               )}
             >
               <div className="flex flex-col gap-6">
