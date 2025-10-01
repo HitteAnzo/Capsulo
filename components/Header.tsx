@@ -48,7 +48,8 @@ export default function Header() {
   const searchBar = (
     <div className={`relative ${isMobile ? 'w-[150px]' : 'w-[220px]'}`}>
       <Search 
-        className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground"
+        className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 transition-colors duration-500"
+        style={{ color: 'var(--header-title-color, hsl(var(--muted-foreground)))' }}
       />
       <input
         ref={inputRef}
@@ -64,19 +65,25 @@ export default function Header() {
         }}
         onKeyDown={handleSearch}
         onBlur={() => setIsSearchOpen(false)} // Ferme quand on clique ailleurs
-        className="w-full rounded-md border bg-transparent pl-10 pr-4 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none transition-colors duration-500"
-        style={{ borderColor: 'var(--theme-color, hsl(var(--border)))' }}
+        className="w-full rounded-md border bg-transparent pl-10 pr-4 py-2 text-sm placeholder:text-current focus:outline-none transition-colors duration-500"
+        style={{ 
+          borderColor: 'var(--header-title-color, hsl(var(--border)))',
+          color: 'var(--header-title-color, hsl(var(--foreground)))'
+        }}
       />
     </div>
   );
 
   return (
-    <header className="w-full border-b sm:sticky sm:top-0 sm:z-50 transition-colors duration-500"
-      style={{ borderColor: 'var(--theme-color, transparent)' }}
+    <header className="w-full backdrop-blur-lg sm:sticky sm:top-0 sm:z-50 transition-colors duration-500"
+      style={{ borderColor: 'var(--header-title-color, transparent)' }}
     >
       <div className={`container flex h-16 max-w-screen-2xl items-center ${hasMounted && isMobile ? 'justify-center' : 'justify-between'}`}>
         <Link href="/" className="flex items-center">
-          <span className="font-bold text-2xl tracking-tight text-foreground">
+          <span 
+            className="font-bold text-2xl tracking-tight transition-colors duration-500"
+            style={{ color: 'var(--header-title-color, hsl(var(--foreground)))' }}
+          >
             Capsulo
           </span>
         </Link>
