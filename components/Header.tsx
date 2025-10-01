@@ -76,7 +76,7 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 w-full bg-background/80 backdrop-blur-lg">
-      <div className="container flex h-16 max-w-screen-2xl items-center justify-between">
+      <div className={`container flex h-16 max-w-screen-2xl items-center ${hasMounted && isMobile ? 'justify-center' : 'justify-between'}`}>
         <Link href="/" className="flex items-center">
           <span 
             className="font-bold text-2xl tracking-tight transition-colors duration-500"
@@ -86,20 +86,7 @@ export default function Header() {
           </span>
         </Link>
 
-        {hasMounted && isMobile ? (
-          isSearchOpen ? (
-            searchBar
-          ) : (
-            <button onClick={() => setIsSearchOpen(true)} className="p-2">
-              <Search 
-                className="h-5 w-5 transition-colors duration-500"
-                style={{ color: 'var(--header-title-color, hsl(var(--muted-foreground)))' }}
-              />
-            </button>
-          )
-        ) : (
-          searchBar
-        )}
+        {hasMounted && !isMobile && searchBar}
       </div>
     </header>
   );
