@@ -91,16 +91,16 @@ function getDecadeTheme(year: number): DecadeTheme {
       };
     case 2010:
       return {
-        background: "bg-slate-900",
-        card: "bg-slate-800 border border-slate-700/50 rounded-xl shadow-lg",
-        titleFont: "font-sans font-bold tracking-tighter text-gray-100",
-        titleColor: "#f3f4f6", // Couleur du titre (gray-100)
-        primaryText: "text-blue-400 font-semibold",
-        secondaryText: "text-slate-400",
-        iconBg: "bg-blue-500/10",
-        subtitleText: "text-slate-300",
-        button: "bg-slate-700 border border-slate-600 text-slate-300 hover:bg-slate-600",
-        iconBorder: "border-blue-400",
+        background: "bg-slate-200", // Fond texturé gris clair, style "lin"
+        card: "bg-gradient-to-b from-white to-gray-100 border border-b-2 border-gray-300 rounded-lg shadow-lg shadow-black/20",
+        titleFont: "font-sans font-bold tracking-tight text-[#cc181e]", // Rouge YouTube
+        titleColor: "#cc181e", // Rouge YouTube pour le header et footer
+        primaryText: "text-slate-800 font-bold",
+        secondaryText: "text-slate-600",
+        iconBg: "bg-gray-200/50",
+        subtitleText: "text-slate-700",
+        button: "bg-gradient-to-b from-gray-100 to-gray-200 border border-gray-400 rounded-md shadow-sm text-gray-700 hover:from-gray-200",
+        iconBorder: "border-gray-400",
       };
     default: // 2020+ et thème par défaut
       return {
@@ -139,12 +139,12 @@ const InfoCard = ({
   headerAccessory?: React.ReactNode;
 }) => (
   <div
-    className={`relative overflow-hidden p-4 sm:p-6 shadow-2xl animate-fade-in-up ${themeClasses} ${className}`}
+    className={`relative overflow-hidden p-4 shadow-2xl animate-fade-in-up ${themeClasses} ${className}`}
     style={{ animationDelay: delay }}
   >
-    <div className="flex items-center justify-between gap-4 mb-4 sm:mb-6">
+    <div className="flex items-center justify-between gap-4 mb-4">
       <div className="flex items-center gap-4">
-        <div className={`flex h-10 w-10 sm:h-12 sm:w-12 shrink-0 items-center justify-center rounded-xl border-2 ${theme.iconBorder}`}>
+        <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border-2 ${theme.iconBorder}`}>
           {icon}
         </div>
         <h3 className={`text-lg sm:text-xl font-semibold ${theme.primaryText}`}>{title}</h3>
@@ -309,9 +309,9 @@ export default function YearPage() {
   return (
     <>
       <div className={`fixed inset-0 -z-20 transition-all duration-1000 ${theme.background}`} />
-      <main className="container mx-auto max-w-5xl py-8 sm:py-16">
+      <main className="container mx-auto max-w-5xl py-4 sm:py-8">
         <div
-          className="text-center mb-12 sm:mb-16 animate-fade-in-up"
+          className="text-center mb-8 sm:mb-10 animate-fade-in-up"
           style={{ animationDelay: "100ms" }}
         >
           <div className="flex items-center justify-center gap-4 sm:gap-8">
@@ -337,9 +337,6 @@ export default function YearPage() {
               <ChevronRight size={32} className={theme.titleFont} />
             </button>
           </div>
-          <p className={`mt-2 sm:mt-4 max-w-2xl mx-auto text-base sm:text-lg ${theme.subtitleText}`}>
-            {t("subtitle")}
-          </p>
         </div>
 
         {error && (
@@ -350,7 +347,7 @@ export default function YearPage() {
         {loading && <div className="text-center text-muted-foreground">{t("loading")}</div>}
 
         {data && (
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <InfoCard
               icon={<Music className={`h-6 w-6 ${theme.primaryText}`} />}
               title={`Les hits en ${y}`}
@@ -359,7 +356,7 @@ export default function YearPage() {
               themeClasses={theme.card}
               theme={theme}
             >
-              <div className="grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-2">
+              <div className="grid grid-cols-1 gap-x-8 gap-y-2 sm:grid-cols-2">
                 {data.music?.map((m, i) => (
                   <SongCard
                     key={i}
@@ -383,9 +380,9 @@ export default function YearPage() {
                 <button className={`px-3 py-1 text-xs rounded-full border transition-colors ${theme.button}`} onClick={() => setShowEUR(!showEUR)}>FRF/EUR</button>
               )}
             >
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4">
                 {/* Colonne de gauche */}
-                <div className="flex flex-col gap-6">
+                <div className="flex flex-col gap-4">
                   <PriceItem
                     icon={<PiggyBank size={20} />}
                     label="SMIC (mensuel brut)"
@@ -412,7 +409,7 @@ export default function YearPage() {
                   />
                 </div>
                 {/* Colonne de droite */}
-                <div className="flex flex-col gap-6">
+                <div className="flex flex-col gap-4">
                   <PriceItem
                     icon={<Wheat size={20} />}
                     label="Baguette"

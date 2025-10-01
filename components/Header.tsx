@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Search } from "lucide-react";
+import { Search, X } from "lucide-react";
 import React from "react";
+import { useIsMobile } from "../lib/hooks/useismobile";
 
 const MIN_YEAR = 1960;
 const MAX_YEAR = 2025;
@@ -12,6 +13,14 @@ const MAX_YEAR = 2025;
 export default function Header() {
   const [year, setYear] = useState("");
   const router = useRouter();
+  const isMobile = useIsMobile();
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [hasMounted, setHasMounted] = useState(false);
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
 
   const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
@@ -23,9 +32,40 @@ export default function Header() {
           router.push(`/year/${numericYear}`);
         }
         setYear("");
+        setIsSearchOpen(false); // Ferme la recherche après exécution
       }
     }
   };
+
+  // Donne le focus à l'input quand il apparaît
+  useEffect(() => {
+    if (isSearchOpen && isMobile) {
+      inputRef.current?.focus();
+    }
+  }, [isSearchOpen, isMobile]);
+
+  const searchBar = (
+    <div className={`relative ${isMobile ? 'w-[150px]' : 'w-[220px]'}`}>
+      <Search 
+        className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 transition-colors duration-500"
+        style={{ color: 'var(--header-title-color, hsl(var(--muted-foreground)))' }}
+      />
+      <input
+        ref={inputRef}
+        type="number"
+        placeholder="Aller à l'année..."
+        value={year}
+        onChange={(e) => setYear(e.target.value)}
+        onKeyDown={handleSearch}
+        onBlur={() => setIsSearchOpen(false)} // Ferme quand on clique ailleurs
+        className="w-full rounded-md border bg-transparent pl-10 pr-4 py-2 text-sm placeholder:text-current focus:outline-none transition-colors duration-500 [-moz-appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+        style={{ 
+          borderColor: 'var(--header-title-color, hsl(var(--border)))',
+          color: 'var(--header-title-color, inherit)'
+        }}
+      />
+    </div>
+  );
 
   return (
     <header className="sticky top-0 z-50 w-full bg-background/80 backdrop-blur-lg">
@@ -39,24 +79,20 @@ export default function Header() {
           </span>
         </Link>
 
-        <div className="relative w-full max-w-[220px]">
-          <Search 
-            className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 transition-colors duration-500"
-            style={{ color: 'var(--header-title-color, hsl(var(--muted-foreground)))' }}
-          />
-          <input
-            type="number"
-            placeholder="Aller à l'année..."
-            value={year}
-            onChange={(e) => setYear(e.target.value)}
-            onKeyDown={handleSearch}
-            className="w-full rounded-md border bg-transparent pl-10 pr-4 py-2 text-sm placeholder:text-current focus:outline-none transition-colors duration-500 [-moz-appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
-            style={{ 
-              borderColor: 'var(--header-title-color, hsl(var(--border)))',
-              color: 'var(--header-title-color, inherit)'
-            }}
-          />
-        </div>
+        {hasMounted && isMobile ? (
+          isSearchOpen ? (
+            searchBar
+          ) : (
+            <button onClick={() => setIsSearchOpen(true)} className="p-2">
+              <Search 
+                className="h-5 w-5 transition-colors duration-500"
+                style={{ color: 'var(--header-title-color, hsl(var(--muted-foreground)))' }}
+              />
+            </button>
+          )
+        ) : (
+          searchBar
+        )}
       </div>
     </header>
   );

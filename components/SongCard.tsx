@@ -1,4 +1,7 @@
+"use client";
+
 import React from "react";
+import { useIsMobile } from "../lib/hooks/useismobile";
 
 type Props = {
   title: string;
@@ -16,6 +19,36 @@ export default function SongCard({
   deezerUrl,
   theme, // On récupère le thème
 }: Props) {
+  const isMobile = useIsMobile();
+
+  // Layout pour mobile
+  if (isMobile) {
+    return (
+      <div className="flex flex-col gap-3 py-4">
+        <div>
+          <a
+            href={deezerUrl ?? "#"}
+            target="_blank"
+            rel="noreferrer"
+            className={`block font-semibold hover:underline ${theme.primaryText}`}
+          >
+            {title}
+          </a>
+          <p className={`text-sm ${theme.secondaryText}`}>{artist}</p>
+        </div>
+        {previewUrl && (
+          <audio
+            controls
+            src={previewUrl}
+            className="w-full"
+            style={{ height: "30px" }}
+          />
+        )}
+      </div>
+    );
+  }
+
+  // Layout pour ordinateur (inchangé)
   return (
     <div className="flex items-center justify-between gap-4 py-4">
       {/* Titre et Artiste */}
