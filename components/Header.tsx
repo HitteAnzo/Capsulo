@@ -16,8 +16,11 @@ export default function Header() {
     if (e.key === "Enter") {
       const numericYear = Number(year);
       if (!isNaN(numericYear) && year.length === 4) {
-        const clampedYear = Math.min(MAX_YEAR, Math.max(MIN_YEAR, numericYear));
-        router.push(`/year/${clampedYear}`);
+        if (numericYear < MIN_YEAR || numericYear > MAX_YEAR) {
+          router.push('/not-found');
+        } else {
+          router.push(`/year/${numericYear}`);
+        }
         setYear("");
       }
     }

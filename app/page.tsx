@@ -21,12 +21,22 @@ function HomePageContent() {
   const clampYear = (y: number) => Math.min(MAX_YEAR, Math.max(MIN_YEAR, y));
 
   function go() {
-    const y = clampYear(year || new Date().getFullYear() - 25);
-    router.push(`/year/${y}?lang=${lang}`);
+    const y = year || new Date().getFullYear() - 25;
+    if (y < MIN_YEAR || y > MAX_YEAR) {
+      router.push('/not-found');
+    } else {
+      router.push(`/year/${y}?lang=${lang}`);
+    }
   }
 
   function handleDecadeSelect(decade: number) {
-    const candidate = decade + Math.floor(Math.random() * 10);
+    let candidate: number;
+    if (decade === 2020) {
+      // Génère une année entre 2020 et 2024
+      candidate = 2020 + Math.floor(Math.random() * 5);
+    } else {
+      candidate = decade + Math.floor(Math.random() * 10);
+    }
     const y = clampYear(candidate);
     router.push(`/year/${y}?lang=${lang}`);
   }

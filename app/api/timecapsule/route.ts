@@ -87,7 +87,7 @@ async function fetchMusic(year: number) {
     rows.map(async (row) => {
       try {
         const res = await fetch(`https://api.deezer.com/track/${row.deezerId}`, {
-          next: { revalidate: 86400 },
+          cache: "no-store", // Ne pas mettre en cache la réponse de Deezer
         });
         const j = await res.json();
         if (!j?.id) {

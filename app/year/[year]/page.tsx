@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useParams, useRouter, useSearchParams } from "next/navigation";
+import { useParams, useRouter, useSearchParams, notFound } from "next/navigation";
 import type { TimeCapsule } from "../../../lib/types";
 import { t } from "../../../lib/i18n";
 import type { Lang } from "../../../components/LanguageToggle";
@@ -229,6 +229,10 @@ export default function YearPage() {
   const sp = useSearchParams();
   const lang = (sp.get("lang") || "fr") as Lang;
   const y = Number(params?.year);
+
+  if (Number.isNaN(y) || y < 1960 || y > 2024) {
+    notFound();
+  }
 
   const [data, setData] = useState<TimeCapsule | null>(null);
   const [loading, setLoading] = useState(false);
