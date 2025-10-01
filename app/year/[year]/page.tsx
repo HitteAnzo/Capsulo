@@ -25,15 +25,15 @@ function getDecadeTheme(year: number): DecadeTheme {
   switch (decade) {
     case 1960:
       return {
-        background: `bg-orange-200 bg-[url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80' width='80' height='80'%3e%3cpath fill='%23e58948' fill-opacity='0.4' d='M40 0c22.09 0 40 17.91 40 40S62.09 80 40 80 0 62.09 0 40S17.91 0 40 0zm0 8c17.67 0 32 14.33 32 32s-14.33 32-32 32S8 57.67 8 40 22.33 8 40 8zm0 8c13.25 0 24 10.75 24 24s-10.75 24-24 24-24-10.75-24-24 10.75-24 24-24zm0 8c8.84 0 16 7.16 16 16s-7.16 16-16 16-16-7.16-16-16 7.16-16 16-16z'%3e%3c/path%3e%3c/svg%3e")]`,
-        card: "bg-white/80 backdrop-blur-md border border-white/20 rounded-3xl shadow-lg",
-        titleFont: "font-dm-serif text-orange-950 text-shadow-[1px_1px_2px_#ffffff80]",
-        primaryText: "text-rose-950 font-bold",
-        secondaryText: "text-rose-800/90",
-        iconBg: "bg-green-200/40",
-        subtitleText: "text-orange-950/90 text-shadow-[1px_1px_1px_#ffffff50]",
-        button: "bg-orange-200 text-rose-950 border-rose-950/50 hover:brightness-95",
-        iconBorder: "border-rose-950",
+        background: "bg-[#FDF8E1]", // Un fond crème/vanille
+        card: "bg-[#FAF3D3] border-2 border-[#DCCB9A] rounded-xl shadow-lg",
+        titleFont: "font-dm-serif text-[#5D4037]", // Police serif élégante, couleur marron foncé
+        primaryText: "text-[#795548] font-bold",
+        secondaryText: "text-[#8D6E63]",
+        iconBg: "bg-[#EFEBE9]",
+        subtitleText: "text-[#6D4C41]",
+        button: "bg-[#DCCB9A] text-[#5D4037] border-[#BCAAA4] hover:bg-[#D7C08A]",
+        iconBorder: "border-[#A1887F]",
       };
     case 1970:
       return {
