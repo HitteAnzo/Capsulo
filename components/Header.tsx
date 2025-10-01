@@ -24,8 +24,9 @@ export default function Header() {
 
   const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      const numericYear = Number(year);
-      if (!isNaN(numericYear) && year.length === 4) {
+      // On ne lance la recherche que si l'année contient exactement 4 chiffres
+      if (year.length === 4) {
+        const numericYear = Number(year);
         if (numericYear < MIN_YEAR || numericYear > MAX_YEAR) {
           router.push('/not-found');
         } else {
@@ -52,13 +53,19 @@ export default function Header() {
       />
       <input
         ref={inputRef}
-        type="number"
+        type="text"
+        inputMode="numeric"
+        pattern="[0-9]*"
         placeholder="Aller à l'année..."
         value={year}
-        onChange={(e) => setYear(e.target.value)}
+        onChange={(e) => {
+          // Nettoie agressivement l'input pour ne garder que 4 chiffres MAXIMUM
+          const cleanedValue = e.target.value.replace(/[^\d]/g, "").slice(0, 4);
+          setYear(cleanedValue);
+        }}
         onKeyDown={handleSearch}
         onBlur={() => setIsSearchOpen(false)} // Ferme quand on clique ailleurs
-        className="w-full rounded-md border bg-transparent pl-10 pr-4 py-2 text-sm placeholder:text-current focus:outline-none transition-colors duration-500 [-moz-appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+        className="w-full rounded-md border bg-transparent pl-10 pr-4 py-2 text-sm placeholder:text-current focus:outline-none transition-colors duration-500"
         style={{ 
           borderColor: 'var(--header-title-color, hsl(var(--border)))',
           color: 'var(--header-title-color, inherit)'

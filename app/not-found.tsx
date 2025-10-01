@@ -22,7 +22,7 @@ export default function NotFound() {
             href="/"
             className="mt-10 inline-block rounded-md border border-blue-500/20 bg-blue-950/30 px-6 py-3 text-lg font-mono text-blue-300/70 transition-colors hover:bg-blue-900/50 hover:text-blue-300"
           >
-            Retourner au présent
+            Retourner à la sélection.
           </Link>
         </div>
       </main>
