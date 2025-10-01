@@ -1,9 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useParams, useRouter, useSearchParams, notFound } from "next/navigation";
+import { useParams, useRouter, notFound } from "next/navigation";
 import type { TimeCapsule } from "../../../lib/types";
 import { t } from "../../../lib/i18n";
-import type { Lang } from "../../../components/LanguageToggle";
 import SongCard from "../../../components/SongCard";
 import { Music, Clapperboard, Banknote, Film, X, Wheat, Cigarette, Fuel, ChevronLeft, ChevronRight, PiggyBank, Cuboid, Coffee } from "lucide-react";
 
@@ -50,15 +49,15 @@ function getDecadeTheme(year: number): DecadeTheme {
       };
     case 1980:
       return {
-        background: "bg-gradient-to-b from-black to-[#2d004f]",
-        card: "bg-black/50 backdrop-blur-sm border-fuchsia-500/50 shadow-fuchsia-500/20 shadow-lg",
-        titleFont: "font-press-start text-2xl sm:text-3xl md:text-4xl",
-        primaryText: "text-foreground",
-        secondaryText: "text-muted-foreground",
-        iconBg: "bg-secondary",
-        subtitleText: "text-muted-foreground",
-        button: "bg-fuchsia-500/10 text-fuchsia-400 border-fuchsia-500/20 hover:bg-fuchsia-500/20",
-        iconBorder: "border-fuchsia-400",
+        background: "bg-gradient-to-b from-[#2d0b45] via-[#7d2f63] to-[#f9a870]",
+        card: "bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl shadow-2xl",
+        titleFont: "font-press-start text-5xl sm:text-7xl text-yellow-300 [text-shadow:0_0_8px_#f9a870]",
+        primaryText: "text-white font-bold",
+        secondaryText: "text-yellow-200/70",
+        iconBg: "bg-black/30",
+        subtitleText: "text-yellow-200/90",
+        button: "bg-white/10 text-white border-white/20 hover:bg-white/20",
+        iconBorder: "border-yellow-300",
       };
     case 1990:
       return {
@@ -226,8 +225,6 @@ const MovieModal = ({
 export default function YearPage() {
   const params = useParams<{ year: string }>();
   const router = useRouter();
-  const sp = useSearchParams();
-  const lang = (sp.get("lang") || "fr") as Lang;
   const y = Number(params?.year);
 
   if (Number.isNaN(y) || y < 1960 || y > 2024) {
@@ -252,7 +249,7 @@ export default function YearPage() {
       setLoading(true);
       setError(null);
       try {
-        const r = await fetch(`/api/timecapsule?year=${y}&lang=${lang}`);
+        const r = await fetch(`/api/timecapsule?year=${y}`);
         const j = await r.json();
         if (!r.ok) throw new Error(j?.error || "Error");
         setData(j);
@@ -263,7 +260,7 @@ export default function YearPage() {
       }
     }
     load();
-  }, [y, lang]);
+  }, [y]);
 
   const hasFRF = !!data?.breadPrice?.frf_250g && y <= 2001;
   const eurFromFRF = hasFRF
@@ -299,29 +296,29 @@ export default function YearPage() {
         >
           <div className="flex items-center justify-center gap-4 sm:gap-8">
             <button
-              onClick={() => canGoBack && router.push(`/year/${y - 1}?lang=${lang}`)}
+              onClick={() => canGoBack && router.push(`/year/${y - 1}`)}
               className={`p-2 rounded-full transition-opacity ${canGoBack ? 'opacity-70 hover:opacity-100' : 'opacity-0 cursor-default'}`}
               aria-label="Année précédente"
               disabled={!canGoBack}
             >
-              <ChevronLeft size={32} className={theme.subtitleText} />
+              <ChevronLeft size={32} className={theme.titleFont} />
             </button>
 
-            <h1 className={`text-4xl sm:text-5xl md:text-6xl text-foreground ${theme.titleFont}`}>
+            <h1 className={`text-6xl sm:text-8xl font-bold tracking-tighter ${theme.titleFont}`}>
               {y}
             </h1>
 
             <button
-              onClick={() => canGoForward && router.push(`/year/${y + 1}?lang=${lang}`)}
+              onClick={() => canGoForward && router.push(`/year/${y + 1}`)}
               className={`p-2 rounded-full transition-opacity ${canGoForward ? 'opacity-70 hover:opacity-100' : 'opacity-0 cursor-default'}`}
               aria-label="Année suivante"
               disabled={!canGoForward}
             >
-              <ChevronRight size={32} className={theme.subtitleText} />
+              <ChevronRight size={32} className={theme.titleFont} />
             </button>
           </div>
           <p className={`mt-2 sm:mt-4 max-w-2xl mx-auto text-base sm:text-lg ${theme.subtitleText}`}>
-            {t(lang, "subtitle")}
+            {t("subtitle")}
           </p>
         </div>
 
@@ -330,19 +327,19 @@ export default function YearPage() {
             {error}
           </div>
         )}
-        {loading && <div className="text-center text-muted-foreground">{t(lang, "loading")}</div>}
+        {loading && <div className="text-center text-muted-foreground">{t("loading")}</div>}
 
         {data && (
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             <InfoCard
               icon={<Music className={`h-6 w-6 ${theme.primaryText}`} />}
-              title={lang === 'fr' ? `Les hits en ${y}` : `Hits from ${y}`}
+              title={`Les hits en ${y}`}
               delay="300ms"
               className="md:col-span-2"
               themeClasses={theme.card}
               theme={theme}
             >
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div className="grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-2">
                 {data.music?.map((m, i) => (
                   <SongCard
                     key={i}
@@ -358,7 +355,7 @@ export default function YearPage() {
 
             <InfoCard
               icon={<Banknote className={`h-6 w-6 ${theme.primaryText}`} />}
-              title={t(lang, "lifePrices")}
+              title={t("lifePrices")}
               delay="400ms"
               themeClasses={theme.card}
               theme={theme}
@@ -426,7 +423,7 @@ export default function YearPage() {
 
             <InfoCard
               icon={<Film className={`h-6 w-6 ${theme.primaryText}`} />}
-              title={lang === 'fr' ? `Box-office en ${y}` : `Box office in ${y}`}
+              title={`Box-office en ${y}`}
               delay="500ms"
               themeClasses={theme.card}
               theme={theme}

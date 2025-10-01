@@ -17,41 +17,49 @@ const TMDB_KEY = process.env.TMDB_KEY;
 // ----------------------
 // Helpers
 // ----------------------
-const WIKI_SUMMARY = (title: string, lang: string) =>
-  `https://${lang}.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(
+const WIKI_SUMMARY = (title: string) =>
+  `https://fr.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(
     title
   )}`;
 
 async function fetchJSON(input: string, init?: RequestInit) {
-  const r = await fetch(input, { ...init, next: { revalidate: 86400 } });
-  if (!r.ok) throw new Error(`Fetch failed ${r.status}`);
-  return r.json();
+  const res = await fetch(input, {
+    ...init,
+    headers: {
+      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+      ...init?.headers,
+    },
+  });
+  if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+  return res.json();
 }
 
-async function fetchEvents(year: number, lang: string) {
+// ----------------------
+// Événements (Wikipedia)
+// ----------------------
+async function fetchEvents(year: number) {
   const titles = [
-    lang === "fr" ? `${year} en musique` : `${year} in music`,
-    lang === "fr" ? `${year} au cinéma` : `${year} in film`,
-    lang === "fr" ? `${year} en mode` : `${year} in fashion`,
+    `${year} en musique`,
+    `${year} au cinéma`,
+    `${year} en mode`,
     `${year}`,
   ];
   const seen = new Set<string>();
   const items: { title: string; summary: string; url: string }[] = [];
   for (const t of titles) {
     try {
-      const j = await fetchJSON(WIKI_SUMMARY(t, lang));
+      const j = await fetchJSON(WIKI_SUMMARY(t));
       if (j?.title && !seen.has(j.title)) {
         seen.add(j.title);
         items.push({
           title: j.title,
-          summary: j.extract,
+          summary: j.summary,
           url: j.content_urls?.desktop?.page,
         });
       }
       if (items.length >= 5) break;
     } catch {}
   }
-  if (!items.length && lang === "fr") return fetchEvents(year, "en");
   return items;
 }
 
@@ -124,7 +132,7 @@ async function fetchMusic(year: number) {
 // ----------------------
 // Films (CSV + TMDB affiches)
 // ----------------------
-async function fetchMovies(year: number, lang: string) {
+async function fetchMovies(year: number) {
   const filePath = path.join(process.cwd(), "data/movies_boxoffice_fr.csv");
   const movies: { title: string; poster?: string }[] = [];
 
@@ -144,7 +152,7 @@ async function fetchMovies(year: number, lang: string) {
     movies.map(async (m) => {
       try {
         const q = encodeURIComponent(m.title);
-        const url = `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_KEY}&query=${q}&year=${year}&language=${lang}`;
+        const url = `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_KEY}&query=${q}&year=${year}&language=fr`;
         const res = await fetch(url, { next: { revalidate: 604800 } });
         const j = await res.json();
         if (j?.results?.length) {
@@ -302,14 +310,11 @@ async function fetchCafe(year: number) {
 // ----------------------
 // Mode
 // ----------------------
-async function fetchFashion(year: number, lang: string) {
+async function fetchFashion(year: number) {
   const decade = Math.floor(year / 10) * 10;
-  const title =
-    lang === "fr"
-      ? `Mode des années ${decade}`
-      : `Fashion in the ${decade}s`;
+  const title = `Mode des années ${decade}`;
   try {
-    const j = await fetchJSON(WIKI_SUMMARY(title, lang));
+    const j = await fetchJSON(WIKI_SUMMARY(title));
     return [
       {
         headline: j.title,
@@ -318,7 +323,6 @@ async function fetchFashion(year: number, lang: string) {
       },
     ];
   } catch {
-    if (lang === "fr") return fetchFashion(year, "en");
     return [];
   }
 }
@@ -385,15 +389,11 @@ export async function GET(req: NextRequest) {
 
   // --------- Mode "capsule annuelle"
   const year = Number(url.searchParams.get("year"));
-  const lang = (url.searchParams.get("lang") || "fr").toLowerCase();
 
   if (!year || year < 1960 || year > 2025) {
     return NextResponse.json(
       {
-        error:
-          lang === "fr"
-            ? "Année invalide (1960–2025)"
-            : "Invalid year (1960–2025)",
+        error: "Année invalide (1960–2025)",
       },
       { status: 400 }
     );
@@ -411,11 +411,11 @@ export async function GET(req: NextRequest) {
     gold,
     cafe,
   ] = await Promise.all([
-    fetchEvents(year, lang),
+    fetchEvents(year),
     fetchMusic(year),
-    fetchMovies(year, lang),
+    fetchMovies(year),
     fetchBread(year),
-    fetchFashion(year, lang),
+    fetchFashion(year),
     fetchCigarette(year),
     fetchGazole(year),
     fetchSmic(year),

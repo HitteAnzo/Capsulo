@@ -1,7 +1,6 @@
 "use client";
 import { Suspense, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
-import { Lang } from "../components/LanguageToggle";
+import { useRouter } from "next/navigation";
 import { t } from "../lib/i18n";
 import HeroSection from "../components/HeroSection";
 import YearInputForm from "../components/YearInputForm";
@@ -14,8 +13,6 @@ const MAX_YEAR = 2025;
 
 function HomePageContent() {
   const [year, setYear] = useState<number | undefined>();
-  const params = useSearchParams();
-  const lang = (params.get("lang") || "fr") as Lang;
   const router = useRouter();
 
   const clampYear = (y: number) => Math.min(MAX_YEAR, Math.max(MIN_YEAR, y));
@@ -25,7 +22,7 @@ function HomePageContent() {
     if (y < MIN_YEAR || y > MAX_YEAR) {
       router.push('/not-found');
     } else {
-      router.push(`/year/${y}?lang=${lang}`);
+      router.push(`/year/${y}`);
     }
   }
 
@@ -38,7 +35,7 @@ function HomePageContent() {
       candidate = decade + Math.floor(Math.random() * 10);
     }
     const y = clampYear(candidate);
-    router.push(`/year/${y}?lang=${lang}`);
+    router.push(`/year/${y}`);
   }
 
   const decadeShortcuts = [1960, 1970, 1980, 1990, 2000, 2010, 2020];
@@ -55,7 +52,7 @@ function HomePageContent() {
       <main className="flex flex-col items-center justify-center text-center flex-grow">
         <HeroSection
           title="C'était mieux avant ?"
-          subtitle={t(lang, "subtitle")}
+          subtitle={t("subtitle")}
         />
 
         <div
@@ -67,7 +64,7 @@ function HomePageContent() {
             onYearChange={(value) => setYear(value ? Number(value) : undefined)}
             onSubmit={go}
             onKeyDown={(e) => e.key === "Enter" && go()}
-            buttonText={t(lang, "go")}
+            buttonText={t("go")}
             placeholder="Ex: 1999"
           />
           <DecadeSelector
