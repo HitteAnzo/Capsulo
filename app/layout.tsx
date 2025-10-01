@@ -39,7 +39,7 @@ export default function RootLayout({
       >
         <Header />
         <div className="pointer-events-none fixed inset-0 -z-10 bg-[radial-gradient(600px_circle_at_top,rgba(120,113,198,0.15),transparent_80%)]" />
-        <div className="container flex min-h-screen flex-col pt-16">
+        <div className="container flex min-h-screen flex-col sm:pt-16">
           <main className="flex-grow">{children}</main>
           <Footer />
         </div>

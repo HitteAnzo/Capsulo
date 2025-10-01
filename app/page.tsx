@@ -18,7 +18,16 @@ function HomePageContent() {
   const clampYear = (y: number) => Math.min(MAX_YEAR, Math.max(MIN_YEAR, y));
 
   function go() {
-    const y = year || new Date().getFullYear() - 25;
+    let y: number;
+    if (year) {
+      y = year;
+    } else {
+      // Génère une année aléatoire entre 1960 et 2024 si le champ est vide
+      const min = 1960;
+      const max = 2024;
+      y = Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
     if (y < MIN_YEAR || y > MAX_YEAR) {
       router.push('/not-found');
     } else {

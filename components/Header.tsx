@@ -75,8 +75,8 @@ export default function Header() {
   );
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-background/80 backdrop-blur-lg">
-      <div className={`container flex h-16 max-w-screen-2xl items-center ${hasMounted && isMobile ? 'justify-center' : 'justify-between'}`}>
+    <header className="w-full bg-background/80 backdrop-blur-lg sm:sticky sm:top-0 sm:z-50">
+      <div className={`container flex h-16 max-w-screen-2xl items-center ${hasMounted && isMobile ? 'justify-start' : 'justify-between'}`}>
         <Link href="/" className="flex items-center">
           <span 
             className="font-bold text-2xl tracking-tight transition-colors duration-500"
