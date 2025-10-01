@@ -5,7 +5,7 @@ import type { TimeCapsule } from "../../../lib/types";
 import { t } from "../../../lib/i18n";
 import type { Lang } from "../../../components/LanguageToggle";
 import SongCard from "../../../components/SongCard";
-import { Music, Clapperboard, Banknote, Film, X, Wheat, Cigarette, Fuel, ChevronLeft, ChevronRight } from "lucide-react";
+import { Music, Clapperboard, Banknote, Film, X, Wheat, Cigarette, Fuel, ChevronLeft, ChevronRight, PiggyBank, Cuboid, Coffee } from "lucide-react";
 
 // --- DÉBUT : Logique de Thème par Décennie ---
 type DecadeTheme = {
@@ -233,8 +233,14 @@ export default function YearPage() {
   const [data, setData] = useState<TimeCapsule | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [showEUR, setShowEUR] = useState(true);
+  const [showEUR, setShowEUR] = useState(y >= 2002);
   const [selectedMovie, setSelectedMovie] = useState<TimeCapsule["movies"][0] | null>(null);
+
+  useEffect(() => {
+    if (y) {
+      setShowEUR(y >= 2002);
+    }
+  }, [y]);
 
   useEffect(() => {
     if (!y || Number.isNaN(y)) return;
@@ -269,6 +275,10 @@ export default function YearPage() {
   const gazoleEurFromFRF = hasGazoleFRF
     ? data!.gazolePrice!.frf_litre! / 6.55957
     : undefined;
+    
+  const hasSmicFRF = !!data?.smicPrice?.frf_monthly && y < 2002;
+  const hasGoldFRF = !!data?.goldPrice?.frf_kg && y < 2002;
+  const hasCafeFRF = !!data?.cafePrice?.frf_unit && y < 2002;
 
   const theme = getDecadeTheme(y);
 
@@ -322,7 +332,7 @@ export default function YearPage() {
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             <InfoCard
               icon={<Music className={`h-6 w-6 ${theme.primaryText}`} />}
-              title={t(lang, "music")}
+              title={lang === 'fr' ? `Les hits en ${y}` : `Hits from ${y}`}
               delay="300ms"
               className="md:col-span-2"
               themeClasses={theme.card}
@@ -348,41 +358,71 @@ export default function YearPage() {
               delay="400ms"
               themeClasses={theme.card}
               theme={theme}
-              headerAccessory={(hasFRF || hasCigaretteFRF || hasGazoleFRF) && (
+              headerAccessory={y < 2002 && (hasFRF || hasCigaretteFRF || hasGazoleFRF || hasSmicFRF || hasGoldFRF || hasCafeFRF) && (
                 <button className={`px-3 py-1 text-xs rounded-full border transition-colors ${theme.button}`} onClick={() => setShowEUR(!showEUR)}>FRF/EUR</button>
               )}
             >
-              <div className="flex flex-col gap-6">
-                <PriceItem
-                  icon={<Wheat size={20} />}
-                  label="Baguette"
-                  price={showEUR ? eurFromFRF ?? data.breadPrice?.eur_250g : data.breadPrice?.frf_250g}
-                  currency={showEUR ? "€" : "FRF"}
-                  realPrice2025={data.breadPrice?.real2025}
-                  theme={theme}
-                />
-                <PriceItem
-                  icon={<Cigarette size={20} />}
-                  label="Cigarettes"
-                  price={showEUR ? cigaretteEurFromFRF ?? data.cigarettePrice?.eur_pack : data.cigarettePrice?.frf_pack}
-                  currency={showEUR ? "€" : "FRF"}
-                  realPrice2025={data.cigarettePrice?.real2025}
-                  theme={theme}
-                />
-                <PriceItem
-                  icon={<Fuel size={20} />}
-                  label="Gazole"
-                  price={showEUR ? gazoleEurFromFRF ?? data.gazolePrice?.eur_litre : data.gazolePrice?.frf_litre}
-                  currency={showEUR ? "€" : "FRF"}
-                  realPrice2025={data.gazolePrice?.real2025}
-                  theme={theme}
-                />
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-6">
+                {/* Colonne de gauche */}
+                <div className="flex flex-col gap-6">
+                  <PriceItem
+                    icon={<PiggyBank size={20} />}
+                    label="SMIC (mensuel brut)"
+                    price={showEUR ? data.smicPrice?.eur_monthly : data.smicPrice?.frf_monthly}
+                    currency={showEUR ? "€" : "FRF"}
+                    realPrice2025={data.smicPrice?.real2025}
+                    theme={theme}
+                  />
+                  <PriceItem
+                    icon={<Cuboid size={20} />}
+                    label="Or (kilo)"
+                    price={showEUR ? data.goldPrice?.eur_kg : data.goldPrice?.frf_kg}
+                    currency={showEUR ? "€" : "FRF"}
+                    realPrice2025={data.goldPrice?.real2025}
+                    theme={theme}
+                  />
+                  <PriceItem
+                    icon={<Fuel size={20} />}
+                    label="Gazole (litre)"
+                    price={showEUR ? gazoleEurFromFRF ?? data.gazolePrice?.eur_litre : data.gazolePrice?.frf_litre}
+                    currency={showEUR ? "€" : "FRF"}
+                    realPrice2025={data.gazolePrice?.real2025}
+                    theme={theme}
+                  />
+                </div>
+                {/* Colonne de droite */}
+                <div className="flex flex-col gap-6">
+                  <PriceItem
+                    icon={<Wheat size={20} />}
+                    label="Baguette"
+                    price={showEUR ? eurFromFRF ?? data.breadPrice?.eur_250g : data.breadPrice?.frf_250g}
+                    currency={showEUR ? "€" : "FRF"}
+                    realPrice2025={data.breadPrice?.real2025}
+                    theme={theme}
+                  />
+                  <PriceItem
+                    icon={<Cigarette size={20} />}
+                    label="Cigarettes (paquet)"
+                    price={showEUR ? cigaretteEurFromFRF ?? data.cigarettePrice?.eur_pack : data.cigarettePrice?.frf_pack}
+                    currency={showEUR ? "€" : "FRF"}
+                    realPrice2025={data.cigarettePrice?.real2025}
+                    theme={theme}
+                  />
+                  <PriceItem
+                    icon={<Coffee size={20} />}
+                    label="Café (au comptoir)"
+                    price={showEUR ? data.cafePrice?.eur_unit : data.cafePrice?.frf_unit}
+                    currency={showEUR ? "€" : "FRF"}
+                    realPrice2025={data.cafePrice?.real2025}
+                    theme={theme}
+                  />
+                </div>
               </div>
             </InfoCard>
 
             <InfoCard
               icon={<Film className={`h-6 w-6 ${theme.primaryText}`} />}
-              title={t(lang, "movies")}
+              title={lang === 'fr' ? `Box-office en ${y}` : `Box office in ${y}`}
               delay="500ms"
               themeClasses={theme.card}
               theme={theme}

@@ -95,9 +95,9 @@ year,title,artist,__parsed_extra,deezerId
 1975,Shine On You Crazy Diamond,Pink Floyd,,116914036
 1975,Go Your Own Way,Fleetwood Mac,,63480990
 1976,,,,2254116
-1976,Laisse béton,Renaud,,69125500
+1976,,,,364951
 1976,L’Aziza,Daniel Balavoine,,886349
-1976,Petite Marie,Francis Cabrel,,551991
+1976,,,,884025
 1976,Hotel California,Eagles,,426703682
 1976,Beth,Kiss,,1550816162
 1977,,,,705016622
@@ -388,3 +388,4 @@ year,title,artist,__parsed_extra,deezerId
 2024,Lunch,Billie Eilish,,2801558032
 2024,First Person Shooter,Drake,,2486117571
 2024,,,,3040002541
+1961,,,,3156614

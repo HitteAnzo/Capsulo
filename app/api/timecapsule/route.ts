@@ -4,6 +4,9 @@ import { inflationFactor } from "../../../lib/cpi";
 import { baguetteForYear } from "../../../lib/baguette";
 import { cigaretteForYear } from "../../../lib/cigarette";
 import { gazoleForYear } from "../../../lib/gazole";
+import { getSmicForYear } from "../../../lib/smic";
+import { getGoldForYear } from "../../../lib/gold";
+import { getCafeForYear } from "../../../lib/cafe";
 import fs from "fs";
 import path from "path";
 import csvParser from "csv-parser";
@@ -229,6 +232,74 @@ async function fetchGazole(year: number) {
 }
 
 // ----------------------
+// SMIC
+// ----------------------
+async function fetchSmic(year: number) {
+  const s = getSmicForYear(year);
+  if (!s) return undefined;
+
+  const factor = inflationFactor(year, CURRENT_YEAR);
+  let real: number | undefined;
+  if (factor && s.eur) {
+    real = s.eur * factor;
+  }
+  return {
+    nominal: s.eur,
+    currency: "EUR",
+    frf_monthly: s.frf,
+    eur_monthly: s.eur,
+    method: factor ? ("cpi" as const) : ("dataset" as const),
+    real2025: real,
+  };
+}
+
+// ----------------------
+// Or
+// ----------------------
+async function fetchGold(year: number) {
+  const g = getGoldForYear(year);
+  if (!g) return undefined;
+
+  const factor = inflationFactor(year, CURRENT_YEAR);
+  let real: number | undefined;
+  if (factor && (g.price_eur_kg || g.price_frf_kg)) {
+    const nominalEUR = g.price_eur_kg ?? g.price_frf_kg! / 6.55957;
+    real = nominalEUR * factor;
+  }
+  return {
+    nominal: g.price_eur_kg,
+    currency: "EUR",
+    frf_kg: g.price_frf_kg,
+    eur_kg: g.price_eur_kg,
+    method: factor ? ("cpi" as const) : ("dataset" as const),
+    real2025: real,
+  };
+}
+
+// ----------------------
+// Café
+// ----------------------
+async function fetchCafe(year: number) {
+  const c = getCafeForYear(year);
+  if (!c) return undefined;
+
+  const factor = inflationFactor(year, CURRENT_YEAR);
+  let real: number | undefined;
+  if (factor && (c.price_eur_unit || c.price_frf_unit)) {
+    const nominalEUR = c.price_eur_unit ?? c.price_frf_unit! / 6.55957;
+    real = nominalEUR * factor;
+  }
+  return {
+    nominal: c.price_eur_unit,
+    currency: "EUR",
+    frf_unit: c.price_frf_unit,
+    eur_unit: c.price_eur_unit,
+    method: factor ? ("cpi" as const) : ("dataset" as const),
+    real2025: real,
+  };
+}
+
+// ----------------------
 // Mode
 // ----------------------
 async function fetchFashion(year: number, lang: string) {
@@ -328,16 +399,29 @@ export async function GET(req: NextRequest) {
     );
   }
 
-  const [events, music, movies, bread, fashion, cigarette, gazole] =
-    await Promise.all([
-      fetchEvents(year, lang),
-      fetchMusic(year),
-      fetchMovies(year, lang),
-      fetchBread(year),
-      fetchFashion(year, lang),
-      fetchCigarette(year),
-      fetchGazole(year),
-    ]);
+  const [
+    events,
+    music,
+    movies,
+    bread,
+    fashion,
+    cigarette,
+    gazole,
+    smic,
+    gold,
+    cafe,
+  ] = await Promise.all([
+    fetchEvents(year, lang),
+    fetchMusic(year),
+    fetchMovies(year, lang),
+    fetchBread(year),
+    fetchFashion(year, lang),
+    fetchCigarette(year),
+    fetchGazole(year),
+    fetchSmic(year),
+    fetchGold(year),
+    fetchCafe(year),
+  ]);
 
   const payload: TimeCapsule = {
     year,
@@ -347,6 +431,9 @@ export async function GET(req: NextRequest) {
     breadPrice: bread,
     cigarettePrice: cigarette,
     gazolePrice: gazole,
+    smicPrice: smic,
+    goldPrice: gold,
+    cafePrice: cafe,
     fashion,
   };
 
