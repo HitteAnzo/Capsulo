@@ -10,7 +10,7 @@ export default function NotFound() {
       <div className="fixed inset-0 -z-20 h-full w-full bg-[#0a101f] bg-[radial-gradient(white_0.5px,transparent_0.5px)] [background-size:20px_20px]"></div>
       <div className="pointer-events-none fixed inset-0 -z-20 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.15),transparent_50%)]"></div>
 
-      <main className="relative flex h-screen flex-col items-center justify-center text-center">
+      <main className="flex flex-col items-center justify-center text-center flex-grow">
         <div className="animate-fade-in-up">
           <h1 className="text-7xl sm:text-9xl font-bold tracking-tighter text-gray-100">
             Oups !

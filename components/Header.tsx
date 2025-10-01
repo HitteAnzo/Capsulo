@@ -30,7 +30,12 @@ export default function Header() {
     <header className="sticky top-0 z-50 w-full bg-background/80 backdrop-blur-lg">
       <div className="container flex h-16 max-w-screen-2xl items-center justify-between">
         <Link href="/" className="flex items-center">
-          <span className="font-bold text-2xl tracking-tight">Capsulo</span>
+          <span 
+            className="font-bold text-2xl tracking-tight transition-colors duration-500"
+            style={{ color: 'var(--header-title-color, inherit)' }}
+          >
+            Capsulo
+          </span>
         </Link>
 
         <div className="relative w-full max-w-[220px]">

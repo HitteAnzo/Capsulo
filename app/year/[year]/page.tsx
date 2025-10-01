@@ -11,6 +11,7 @@ type DecadeTheme = {
   background: string;
   card: string;
   titleFont: string;
+  titleColor: string;
   primaryText: string;
   secondaryText: string;
   iconBg: string;
@@ -25,9 +26,10 @@ function getDecadeTheme(year: number): DecadeTheme {
   switch (decade) {
     case 1960:
       return {
-        background: "bg-[#FDF8E1]", // Un fond crème/vanille
+        background: "bg-[#FDF8E1]",
         card: "bg-[#FAF3D3] border-2 border-[#DCCB9A] rounded-xl shadow-lg",
-        titleFont: "font-dm-serif text-[#5D4037]", // Police serif élégante, couleur marron foncé
+        titleFont: "font-dm-serif text-[#5D4037]",
+        titleColor: "#5D4037", // Couleur du titre
         primaryText: "text-[#795548] font-bold",
         secondaryText: "text-[#8D6E63]",
         iconBg: "bg-[#EFEBE9]",
@@ -40,6 +42,7 @@ function getDecadeTheme(year: number): DecadeTheme {
         background: "bg-[#3D2B24] bg-[radial-gradient(#785549_1px,transparent_1px)] bg-[size:16px_16px]",
         card: "bg-orange-100/80 backdrop-blur-sm border border-orange-200/50 rounded-2xl shadow-lg",
         titleFont: "font-bebas-neue tracking-wider text-orange-200",
+        titleColor: "#ffedd5", // Couleur du titre (orange-200)
         primaryText: "text-amber-950 font-bold",
         secondaryText: "text-amber-900/90",
         iconBg: "bg-amber-800/20",
@@ -51,7 +54,8 @@ function getDecadeTheme(year: number): DecadeTheme {
       return {
         background: "bg-gradient-to-b from-[#2d0b45] via-[#7d2f63] to-[#f9a870]",
         card: "bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl shadow-2xl",
-        titleFont: "font-press-start text-5xl sm:text-7xl text-yellow-300 [text-shadow:0_0_8px_#f9a870]",
+        titleFont: "font-press-start text-yellow-300 [text-shadow:0_0_8px_#f9a870]",
+        titleColor: "#fde047", // Couleur du titre (yellow-300)
         primaryText: "text-white font-bold",
         secondaryText: "text-yellow-200/70",
         iconBg: "bg-black/30",
@@ -64,6 +68,7 @@ function getDecadeTheme(year: number): DecadeTheme {
         background: "bg-blue-600 bg-[radial-gradient(#ffffff33_1px,transparent_1px)] bg-[size:16px_16px]",
         card: "bg-yellow-300 border-4 border-blue-800 rounded-lg shadow-[8px_8px_0px_#1e3a8a]",
         titleFont: "font-sans font-black text-white text-shadow-[4px_4px_0px_#000]",
+        titleColor: "#ffffff", // Couleur du titre (white)
         primaryText: "text-black",
         secondaryText: "text-gray-800",
         iconBg: "bg-blue-400",
@@ -76,6 +81,7 @@ function getDecadeTheme(year: number): DecadeTheme {
         background: "bg-gradient-to-br from-sky-50/50 via-white to-blue-100/50",
         card: "bg-white/50 backdrop-blur-lg border border-white/30 rounded-2xl shadow-lg",
         titleFont: "font-sans font-bold tracking-tight",
+        titleColor: "#1e293b", // Couleur du titre (slate-800)
         primaryText: "text-slate-800",
         secondaryText: "text-slate-600",
         iconBg: "bg-white/50",
@@ -88,6 +94,7 @@ function getDecadeTheme(year: number): DecadeTheme {
         background: "bg-slate-900",
         card: "bg-slate-800 border border-slate-700/50 rounded-xl shadow-lg",
         titleFont: "font-sans font-bold tracking-tighter text-gray-100",
+        titleColor: "#f3f4f6", // Couleur du titre (gray-100)
         primaryText: "text-blue-400 font-semibold",
         secondaryText: "text-slate-400",
         iconBg: "bg-blue-500/10",
@@ -100,6 +107,7 @@ function getDecadeTheme(year: number): DecadeTheme {
         background: "bg-black bg-[radial-gradient(circle_800px_at_50%_200px,rgba(255,255,255,0.08),transparent)]",
         card: "bg-gray-800/40 backdrop-blur-xl border border-white/10 rounded-3xl",
         titleFont: "font-sans font-bold tracking-tight text-gray-50",
+        titleColor: "#f9fafb", // Couleur du titre (gray-50)
         primaryText: "text-gray-200",
         secondaryText: "text-gray-400",
         iconBg: "bg-gray-700/50",
@@ -237,6 +245,20 @@ export default function YearPage() {
   const [showEUR, setShowEUR] = useState(y >= 2002);
   const [selectedMovie, setSelectedMovie] = useState<TimeCapsule["movies"][0] | null>(null);
 
+  const theme = getDecadeTheme(y);
+
+  useEffect(() => {
+    // Applique les couleurs du thème comme variables CSS
+    document.documentElement.style.setProperty('--header-title-color', theme.titleColor);
+    document.documentElement.style.setProperty('--footer-text-color', theme.titleColor); // Utilise la même couleur que le titre
+
+    // Nettoyage : réinitialise les couleurs quand on quitte la page
+    return () => {
+      document.documentElement.style.removeProperty('--header-title-color');
+      document.documentElement.style.removeProperty('--footer-text-color');
+    };
+  }, [theme]);
+
   useEffect(() => {
     if (y) {
       setShowEUR(y >= 2002);
@@ -280,8 +302,6 @@ export default function YearPage() {
   const hasSmicFRF = !!data?.smicPrice?.frf_monthly && y < 2002;
   const hasGoldFRF = !!data?.goldPrice?.frf_kg && y < 2002;
   const hasCafeFRF = !!data?.cafePrice?.frf_unit && y < 2002;
-
-  const theme = getDecadeTheme(y);
 
   const canGoBack = y > 1960;
   const canGoForward = y < 2025;
