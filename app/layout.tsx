@@ -24,7 +24,7 @@ const dmSerifDisplay = DM_Serif_Display({
 
 export const metadata: Metadata = {
   title: "Capsulo",
-  description: "Explorez musiques, films, mode et prix d'une année donnée.",
+  description: "Explorez musiques, films et prix d'une année donnée.",
 };
 
 export default function RootLayout({

@@ -1,5 +1,5 @@
 const dict: Record<string, string> = {
-  subtitle: "Choisis une année pour explorer événements, musiques, films, prix et tendances.",
+  subtitle: "Entrez une année. Remontez le temps.",
   go: "Voyager",
   changeYear: "Changer d'année",
   loading: "Chargement…",
